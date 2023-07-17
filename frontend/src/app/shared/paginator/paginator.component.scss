@@ -1,0 +1,87 @@
+@import "./../../../theme/variables/variables.scss";
+@import "./../../../theme/fonts/fonts.scss";
+
+* {
+	mat-icon {
+		width: 1.25rem;
+		height: 1.25rem;
+	}
+}
+
+.wrapper {
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	margin-top: 1rem;
+
+	.caption-1 {
+		color: $gray-shade-6 !important;
+	}
+
+	.count {
+		@include font-roboto($weight: 500, $size: 0.875rem, $lh: 150%, $color: $gray-shade-8);
+	}
+
+	.pagination {
+		display: inline-flex;
+		border-radius: 0.5rem;
+		border: 1px solid $gray-shade-5;
+		max-height: 2.75rem;
+		background-color: $primary-2;
+
+		@include font-montserrat($size: 0.875rem, $weight: 600, $lh: 120%, $color: $gray-shade-8);
+
+		.page-number-blocks {
+			border-right: 1px solid $gray-shade-5;
+			padding: 0.8438rem 1.0625rem;
+			display: inline-block;
+			height: 100%;
+
+			&:hover {
+				background: $gray-shade-2;
+				cursor: pointer;
+			}
+
+			&:active {
+				background: $gray-shade-4;
+			}
+		}
+
+		.nav-link {
+			&-left {
+				display: flex;
+				gap: 0.5rem;
+				justify-content: center;
+				align-items: center;
+				border-right: none;
+				border-right: 1px solid $gray-shade-5;
+				border-radius: 0.5rem 0 0 0.5rem;
+				padding: 0.8438rem 1rem;
+
+				&:hover {
+					background: $gray-shade-2;
+					cursor: pointer;
+				}
+			}
+
+			&-right {
+				display: flex;
+				gap: 0.5rem;
+				justify-content: center;
+				align-items: center;
+				border-left: none;
+				border-radius: 0 0.5rem 0.5rem 0;
+				padding: 0.8438rem 1rem;
+
+				&:hover {
+					background: $gray-shade-2;
+					cursor: pointer;
+				}
+			}
+		}
+	}
+}
+
+.active {
+	background: $gray-shade-3;
+}

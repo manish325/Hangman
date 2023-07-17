@@ -1,0 +1,51 @@
+<main class="category-dialog">
+    <div class="heading">
+        <h2>Add Player</h2>
+    </div>
+    <form class="category-form" [formGroup]="playerForm">
+        <mat-form-field>
+            <mat-label>
+                Enter Username
+            </mat-label>
+            <input matInput type="text" [formControl]="$any(playerForm.get('username'))">
+            <mat-error>Please Enter Username</mat-error>
+        </mat-form-field>
+
+        <mat-form-field>
+            <mat-label>
+                Enter Password
+            </mat-label>
+            <input matInput type="text" [formControl]="$any(playerForm.get('password'))">
+            <mat-error>Please Enter Password</mat-error>
+        </mat-form-field>
+
+        <mat-form-field>
+            <mat-label>
+                Confirm Password
+            </mat-label>
+            <input matInput type="text" [formControl]="$any(playerForm.get('confirmPassword'))">
+            <mat-error
+                *ngIf="$any(playerForm.get('password')?.value)!==$any(playerForm.get('confirmPassword')?.value)">Password
+                Doesn't Match!</mat-error>
+        </mat-form-field>
+
+        <form class="userdetails-form" [formGroup]="$any(playerForm.get('about'))">
+            <mat-form-field>
+                <mat-label>
+                    Enter Contact (Optional)
+                </mat-label>
+                <input matInput type="number" [formControl]="$any(playerForm.get('about')?.get('contact'))">
+            </mat-form-field>
+            <mat-form-field>
+                <mat-label>
+                    Enter Address (Optional)
+                </mat-label>
+                <textarea matInput type="text" [formControl]="$any(playerForm.get('about')?.get('address'))"></textarea>
+            </mat-form-field>
+        </form>
+
+        <div class="action-footer">
+            <button mat-flat-button color="primary" (click)="onSubmit()">Submit</button>
+        </div>
+    </form>
+</main>

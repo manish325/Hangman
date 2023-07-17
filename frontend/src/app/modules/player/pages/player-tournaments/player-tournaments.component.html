@@ -1,0 +1,26 @@
+<main class="player-tournaments">
+    <header>
+        <h2>Tournaments</h2>
+        <button mat-flat-button color="primary" (click)="openTournamentDialog()">Add</button>
+    </header>
+    <footer>
+        <mat-tab-group>
+            <mat-tab>
+                <ng-template mat-tab-label>
+                    <mat-icon>videogame_asset</mat-icon>
+                    Play
+                </ng-template>
+
+                <app-data-grid [dataSource]="dataSource" [displayedColumns]="displayedColumns" [useColumns]="useColumns"></app-data-grid>
+            </mat-tab>
+            <mat-tab>
+                <ng-template mat-tab-label>
+                    <mat-icon>add_circle</mat-icon>
+                    Create
+                </ng-template>
+
+                <app-data-grid [dataSource]="dataSource" [displayedColumns]="displayedColumns" [useColumns]="useColumns"></app-data-grid>
+            </mat-tab>
+        </mat-tab-group>
+    </footer>
+</main>

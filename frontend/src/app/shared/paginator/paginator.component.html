@@ -1,0 +1,58 @@
+<div class="wrapper">
+	<div class="caption-1 md">
+		Total {{typeOfData}}: <span class="count">{{ count }}</span>
+	</div>
+	<div class="pagination">
+		<a
+			(click)="previousPage()"
+			class="nav-link-left"
+			[ngClass]="{
+				'pagination-disabled': currentPageNumber <= startPageNumber
+			}"
+		>
+			<mat-icon  class="disable-hover">arrow_back</mat-icon>
+		</a>
+
+		<div *ngIf="isMaxPagesExceeded(); else other">
+			<a
+				class="page-number-blocks"
+				*ngFor="let t of [].constructor(maxPages); let i = index"
+				(click)="updateCurrentPageNumber(getPageNumberForIndex(i))"
+				[ngClass]="{
+					active: i === 0
+				}"
+			>
+				{{ i === midPage ? "..." : getPageNumberForIndex(i) + 1 }}
+			</a>
+		</div>
+
+		<ng-template #other>
+			<div>
+				<a
+					class="page-number-blocks"
+					*ngFor="let t of [].constructor(maxPages); let i = index"
+					(click)="
+						updateCurrentPageNumber(getPageNumberForIndex(i, false))
+					"
+					[ngClass]="{
+						active:
+							currentPageNumber ===
+							getPageNumberForIndex(i, false)
+					}"
+				>
+					{{ getPageNumberForIndex(i, false) + 1 }}
+				</a>
+			</div>
+		</ng-template>
+
+		<a
+			(click)="nextPage()"
+			class="nav-link-right"
+			[ngClass]="{
+				'pagination-disabled': currentPageNumber >= lastPageNumber
+			}"
+		>
+			<mat-icon  class="disable-hover">arrow_forward</mat-icon>
+		</a>
+	</div>
+</div>

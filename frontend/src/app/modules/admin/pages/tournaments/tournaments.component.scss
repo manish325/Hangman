@@ -1,0 +1,29 @@
+.admin-tournaments {
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+
+    .header {
+        flex-basis: 20%;
+
+        .filter-bar {
+            display: flex;
+            // flex-direction: row-reverse;
+            // gap: 1rem;
+            justify-content: space-between;
+            align-items: center;
+
+            .select-filters {
+                display: flex;
+                gap: 1rem;
+                flex-direction: row-reverse;
+                padding-left: .25rem;
+                align-items: center;
+            }
+        }
+    }
+
+    .footer {
+        flex-basis: 70%;
+    }
+}

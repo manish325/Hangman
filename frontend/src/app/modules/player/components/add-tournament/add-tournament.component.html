@@ -1,0 +1,74 @@
+<main class="add-tournament">
+    <h1>Add Tournament</h1>
+    <form action="" class="tournament-form" [formGroup]="tournamentForm">
+        <!-- Name -->
+        <mat-form-field>
+            <mat-label>Tournament Name</mat-label>
+            <input type="text" matInput [formControl]="$any(tournamentForm.get('tournamentName'))">
+            <mat-error>Please Enter Name</mat-error>
+        </mat-form-field>
+
+        <!-- Details -->
+        <mat-form-field>
+            <mat-label>Tournament Details</mat-label>
+            <textarea type="text" matInput [formControl]="$any(tournamentForm.get('tournamentDetails'))"></textarea>
+            <mat-error></mat-error>
+        </mat-form-field>
+
+        <!-- Category -->
+        <mat-form-field>
+            <mat-label>Select Tournament Category</mat-label>
+            <mat-select [formControl]="$any(tournamentForm.get('tournamentCategory'))">
+                <mat-option *ngFor="let category of categories" [value]="category.categoryId">
+                    {{category.categoryName}}
+                </mat-option>
+            </mat-select>
+        </mat-form-field>
+
+        <!-- Words -->
+        <div class="words-container">
+            <div class="add-word">
+                <h2>
+                    Words
+                </h2>
+                <mat-icon (click)="addWord()">add_box</mat-icon>
+            </div>
+            <div class="word" *ngFor="let control of $any(tournamentForm.get('words'))?.controls; let i=index">
+                <h2>{{i+1}}</h2>
+                <div>
+                    <div class="delete">
+                        <mat-icon (click)="deleteWord(i)" *ngIf="i!==0">
+                            delete
+                        </mat-icon>
+                    </div>
+                    <mat-form-field>
+                        <mat-label>Enter Word</mat-label>
+                        <input type="text" matInput [formControl]="control.get('word')">
+                        <mat-error>Please Enter Word</mat-error>
+                    </mat-form-field>
+                    <mat-form-field>
+                        <mat-label>Enter Hint</mat-label>
+                        <textarea type="text" matInput [formControl]="control.get('hint')"></textarea>
+                        <mat-error>Please Enter Hint</mat-error>
+                    </mat-form-field>
+                </div>
+            </div>
+        </div>
+
+        <!-- Prizes -->
+        <div class="prizes-container">
+            <p>Prizes</p>
+            <div class="prize">
+                <mat-form-field *ngFor="let control of $any(tournamentForm.get('tournamentPrizes'))?.controls; let i=index">
+                    <mat-label>{{i}} Prize</mat-label>
+                    <input type="number" matInput [formControl]="control">
+                    <mat-error>Please Enter Prize</mat-error>
+                </mat-form-field>
+            </div>
+        </div>
+
+        <div class="action">
+            <button class="submit" mat-raised-button color="accent" (click)="submitForm()" [disabled]="tournamentForm.invalid">Add</button>
+        </div>
+    </form>
+</main>

@@ -1,0 +1,34 @@
+/* You can add global styles to this file, and also import other style files */
+@import "./theme/common-styles/drawer.scss";
+@import "./theme/common-styles/forms.scss";
+@import "./theme/common-styles/button.scss";
+@import "./theme/common-styles/tabs.scss";
+
+html, body { height: 100%; }
+body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+
+::-webkit-scrollbar-track {
+	border-radius: 0;
+	background-color: #fff;
+}
+
+::-webkit-scrollbar {
+	width: 16px;
+	height: 16px;
+	background-color: transparent;
+	margin: 8px;
+}
+
+::-webkit-scrollbar-thumb {
+	background-color: rgb(206, 199, 199);;
+	border-radius: 8px;
+	margin: 4px;
+	border: 4px solid transparent;
+	background-clip: padding-box;
+}
+
+::-webkit-scrollbar-thumb:hover {
+	background: rgb(206, 199, 199);;
+	border: 2px solid rgb(206, 199, 199);
+	background-clip: padding-box;
+}

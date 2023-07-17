@@ -1,0 +1,22 @@
+<main class="login">
+    <div class="logo">
+        <marquee behavior="" direction="" class="marquee">
+            <!-- <img src="./../../../../assets/images/Hangman.png" alt=""> -->
+        </marquee>
+    </div>
+    <div class="content" [ngClass]="{'spinner' : roleChoosen}">
+        <ng-container *ngIf="!roleChoosen">
+            <div class="heading">
+                <h1>Choose Role</h1>
+            </div>
+            <div class="form">
+                <section class="roles-container">
+                    <button mat-flat-button color="accent" class="role" *ngFor="let role of roles" (click)="setCurrentRole(role)">
+                        <span>{{role}}</span>
+                    </button>
+                </section>
+            </div>
+        </ng-container>
+        <mat-spinner *ngIf="roleChoosen"></mat-spinner>
+    </div>
+</main>

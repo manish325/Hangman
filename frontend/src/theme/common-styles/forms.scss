@@ -1,0 +1,21 @@
+.admin-categories, .admin-players {
+    .action-bar {
+        .mat-mdc-form-field {
+            .mat-mdc-form-field-bottom-align {
+                display: none !important;
+            }
+        }
+    }
+}
+
+.admin-leaderboard, .admin-tournaments {
+    .header {
+        .filter-bar {
+            .mat-mdc-form-field {
+                .mat-mdc-form-field-bottom-align {
+                    display: none !important;
+                }
+            }
+        }
+    }
+}

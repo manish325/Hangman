@@ -1,0 +1,17 @@
+.admin-categories {
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+
+    .action-bar {
+        display: flex;
+        align-items: center;
+        justify-content: flex-end;
+        gap: 1rem;
+
+        .add {
+            display: flex;
+            align-items: center;
+        }
+    }
+}

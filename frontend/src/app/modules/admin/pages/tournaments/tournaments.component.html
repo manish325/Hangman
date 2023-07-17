@@ -1,0 +1,37 @@
+<main class="admin-tournaments">
+    <div class="header">
+        <h4>Leader Board</h4>
+        <mat-divider></mat-divider>
+        <section class="filter-bar">
+            <div class="select-filters">
+                <button mat-stroked-button color="primary" *ngIf="category.value || player.value"
+                    (click)="clearAllFilters()">clear</button>
+                <mat-form-field>
+                    <mat-label>Select Player</mat-label>
+                    <mat-select [formControl]="player">
+                        <mat-option *ngFor="let P of players" [value]="P.playerId">
+                            {{P.playerName}}
+                        </mat-option>
+                    </mat-select>
+                </mat-form-field>
+                <mat-form-field>
+                    <mat-label>Select Category</mat-label>
+                    <mat-select [formControl]="category">
+                        <mat-option *ngFor="let category of categories" [value]="category.categoryId">
+                            {{category.categoryName}}
+                        </mat-option>
+                    </mat-select>
+                </mat-form-field>
+            </div>
+            <mat-form-field>
+                <mat-label>
+                    Search Tournament
+                    <!-- <mat-icon>search</mat-icon> -->
+                </mat-label>
+                <input type="text" matInput [formControl]="searchTournament">
+            </mat-form-field>
+        </section>
+    </div>
+    <app-data-grid [totalCount]="totalCount" [displayedColumns]="displayedColumns" [dataSource]="dataSource" [useColumns]="useColumns"
+            (action)="handleAction($event)"></app-data-grid>
+</main>

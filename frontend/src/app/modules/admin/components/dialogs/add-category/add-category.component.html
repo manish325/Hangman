@@ -1,0 +1,25 @@
+<main class="category-dialog">
+    <div class="heading">
+        <h4>Add Category</h4>
+    </div>
+    <form class="category-form" [formGroup]="categoryForm">
+        <mat-form-field>
+            <mat-label>
+                Enter Name
+            </mat-label>
+            <input matInput type="text" [formControl]="$any(categoryForm.get('categoryName'))">
+            <mat-error>Please Enter Category Name</mat-error>
+        </mat-form-field>
+        <mat-form-field>
+            <mat-label>
+                Enter Details
+            </mat-label>
+            <textarea matInput type="text" [formControl]="$any(categoryForm.get('categoryDetails'))"></textarea>
+            <mat-error>Please Enter Category Details</mat-error>
+        </mat-form-field>
+
+        <div class="action-footer">
+            <button mat-flat-button color="primary" (click)="onSubmit()">Submit</button>
+        </div>
+    </form>
+</main>

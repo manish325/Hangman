@@ -1,0 +1,15 @@
+.delete-category {
+    display: flex;
+    flex-direction: column;
+    padding: 1rem 1.5rem;
+
+    .heading {
+        text-align: center;
+    }
+
+    .action-footer {
+        display: flex;
+        justify-content: space-between;
+        gap: 2rem;
+    }
+}

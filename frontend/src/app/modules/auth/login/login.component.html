@@ -1,0 +1,50 @@
+<main class="login">
+    <div class="logo">
+        <marquee behavior="" direction="" class="marquee">
+            <!-- <img src="./../../../../assets/images/Hangman.png" alt=""> -->
+        </marquee>
+    </div>
+    <div class="content" [ngClass]="{'spinner' : formSubmitted}">
+        <ng-container *ngIf="!formSubmitted">
+            <div class="heading">
+                <h1>Welcome</h1>
+            </div>
+            <div class="form">
+                <form [formGroup]="loginForm" (ngSubmit)="login()">
+                    <mat-form-field>
+                        <mat-label>
+                            Username
+                        </mat-label>
+                        <input 
+                            type="text" 
+                            matInput 
+                            required 
+                            [formControlName]="'username'"
+                        >
+                        <mat-error>
+                            Please Enter Username
+                        </mat-error>
+                    </mat-form-field>
+                    <mat-form-field>
+                        <mat-label>
+                            Password
+                        </mat-label>
+                        <input 
+                            type="text" 
+                            matInput 
+                            required 
+                            [formControlName]="'password'"
+                        >
+                        <mat-error>
+                            Please Enter Password
+                        </mat-error>
+                    </mat-form-field>
+                    <div class="Submit">
+                        <button mat-raised-button color="primary" [disabled]="loginForm.invalid">Submit</button>
+                    </div>
+                </form>
+            </div>
+        </ng-container>
+        <mat-spinner *ngIf="formSubmitted"></mat-spinner>
+    </div>
+</main>

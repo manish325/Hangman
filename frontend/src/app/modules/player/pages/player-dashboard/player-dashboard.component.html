@@ -1,0 +1,41 @@
+<main class="player-dashboard">
+    <mat-drawer-container class="sidenav-container">
+        <mat-drawer mode="side" opened>
+            <section class="drawer-content">
+                <div class="heading">
+                    <h1>PLAYER</h1>
+                </div>
+                <div class="options-container">
+                    <button mat-raised-button color="accent" [routerLink]="'tournaments'">Tournaments</button>
+                    <!-- <div class="options-container sub-options">
+                        <button mat-raised-button>
+                            <mat-icon>videogame_asset</mat-icon>
+                            Play
+                        </button>
+                        <button mat-raised-button>
+                            <mat-icon>add_circle</mat-icon>
+                            Create
+                        </button>
+                    </div> -->
+                    <button mat-raised-button color="accent" routerLink="progress">Progress</button>
+                    <!-- <div class="options-container sub-options">
+                        <button mat-raised-button>
+                            <mat-icon>pageview</mat-icon>
+                            View Graph
+                        </button>
+                        <button mat-raised-button>
+                            <mat-icon>card_giftcard</mat-icon>
+                            Gifts
+                        </button>
+                    </div> -->
+                </div>
+                <div class="switch-role">
+                    <button mat-raised-button color="primary" (click)="logout()">Logout</button>
+                </div>
+            </section>
+        </mat-drawer>
+        <mat-drawer-content>
+            <router-outlet></router-outlet>
+        </mat-drawer-content>
+    </mat-drawer-container>
+</main>

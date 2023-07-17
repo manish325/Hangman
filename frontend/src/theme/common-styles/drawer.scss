@@ -1,0 +1,15 @@
+.admin-dashboard, .player-dashboard {
+    .mat-drawer-container {
+        flex-basis: 100%;
+        min-height: 100vh;
+        display: flex;
+
+        .mat-drawer {
+            min-width: 20%;
+        }
+
+        .mat-drawer-content {
+            min-width: 80%;
+        }
+    }
+}

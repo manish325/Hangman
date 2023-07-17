@@ -1,0 +1,65 @@
+.login {
+    margin: 0;
+    padding: 0;
+    min-height: 100vh;
+    display: flex;
+
+    .logo {
+         flex-basis: 50%;
+         display: flex;
+         justify-content: center;
+
+         .marquee {
+            flex-basis: 75%;
+            display: flex;
+            align-items: center;
+
+            img {
+                flex-basis: 100%;
+                transform: scale(3);
+            }
+         }
+    }
+
+    .content {
+        display: flex;
+        flex-direction: column;
+        flex-basis: 50%;
+
+        .heading {
+            flex-basis: 20%;
+            display: flex;
+            justify-content: center;
+            align-items: flex-end;
+            font-size: xx-large;
+            font-weight: 1000;
+        }
+
+        .form {
+            flex-basis: 80%;
+            display: flex;
+            justify-content: center;
+            // align-items: center;
+            padding-top: 15rem;
+
+            form {
+                display: flex;
+                flex-direction: column;
+                gap: 1rem;
+                flex-basis: 30%;
+
+                .Submit {
+                    display: flex;
+                    justify-content: center;
+                    margin-top: 2rem;
+                }
+            }
+        }
+    }
+
+    .spinner {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+}

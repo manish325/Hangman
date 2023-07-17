@@ -1,0 +1,20 @@
+.admin-leaderboard {
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+
+    .header {
+        flex-basis: 20%;
+
+        .filter-bar {
+            display: flex;
+            flex-direction: row-reverse;
+            gap: 1rem;
+            align-items: center;
+        }
+    }
+
+    .footer {
+        flex-basis: 70%;
+    }
+}

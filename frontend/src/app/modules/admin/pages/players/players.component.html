@@ -1,0 +1,26 @@
+<main class="admin-players">
+    <header class="header">
+
+        <h4>Players</h4>
+        <mat-divider></mat-divider>
+        <section class="action-bar">
+            <mat-form-field>
+                <mat-label>Search Player</mat-label>
+                <input type="text" matInput [formControl]="searchPlayer">
+            </mat-form-field>
+            <div class="add">
+            <button mat-flat-button color="primary" (click)="openPlayerDialog('add')">Add Player</button>
+        </div>
+    </section>
+</header>
+    <mat-tab-group (selectedTabChange)="handleTabChange($event)">
+        <mat-tab label="Active">
+            <app-data-grid [totalCount]="totalCount" [displayedColumns]="displayedColumns" [dataSource]="dataSource" [useColumns]="useColumns"
+            (action)="handleAction($event)"></app-data-grid>
+        </mat-tab>
+        <mat-tab label="Archived">
+            <app-data-grid [totalCount]="totalCount" [displayedColumns]="displayedColumns" [dataSource]="dataSource" [useColumns]="useColumns"
+            (action)="handleAction($event)"></app-data-grid>
+        </mat-tab>
+    </mat-tab-group>
+</main>

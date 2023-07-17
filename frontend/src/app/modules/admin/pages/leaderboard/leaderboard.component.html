@@ -1,0 +1,27 @@
+<main class="admin-leaderboard">
+    <div class="header">
+        <h4>Leader Board</h4>
+        <mat-divider></mat-divider>
+        <section class="filter-bar">
+            <mat-form-field>
+                <mat-label>Select Tournament</mat-label>
+                <mat-select [formControl]="tournament">
+                    <mat-option *ngFor="let T of tournaments" [value]="T.tournamentId">
+                        {{T.tournamentName}}
+                    </mat-option>
+                </mat-select>
+            </mat-form-field>
+            <mat-form-field>
+                <mat-label>Select Category</mat-label>
+                <mat-select [formControl]="category">
+                    <mat-option *ngFor="let category of categories" [value]="category.categoryId">
+                        {{category.categoryName}}
+                    </mat-option>
+                </mat-select>
+            </mat-form-field>
+            <button mat-stroked-button color="primary" *ngIf="category.value || tournament.value" (click)="clearAllFilters()">clear</button>
+        </section>
+    </div>
+    <app-data-grid [totalCount]="totalCount" [displayedColumns]="displayedColumns" [dataSource]="dataSource" [useColumns]="useColumns"
+    (action)="handleAction($event)"></app-data-grid>
+</main>

@@ -1,0 +1,31 @@
+<main class="gifts-dialog">
+    <div class="heading">
+        <h4>Add gift</h4>
+    </div>
+    <form class="gift-form" [formGroup]="giftForm">
+        <mat-form-field>
+            <mat-label>
+                Enter Gift Name
+            </mat-label>
+            <input matInput type="text" [formControl]="$any(giftForm.get('giftName'))">
+            <mat-error>Please Enter Gift Name</mat-error>
+        </mat-form-field>
+        <mat-form-field>
+            <mat-label>
+                Enter Gift Amount
+            </mat-label>
+            <input matInput type="number" [formControl]="$any(giftForm.get('giftValue'))">
+            <mat-error>Please Enter Gift Amount</mat-error>
+        </mat-form-field>
+        <mat-form-field>
+            <mat-label>
+                Enter Gift Quantity
+            </mat-label>
+            <input matInput type="number" [formControl]="$any(giftForm.get('quantity'))">
+            <mat-error>Please Enter Gift Quantity</mat-error>
+        </mat-form-field>
+        <div class="action-footer">
+            <button mat-flat-button color="primary" (click)="onSubmit()">Submit</button>
+        </div>
+    </form>
+</main>

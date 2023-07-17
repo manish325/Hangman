@@ -1,0 +1,26 @@
+<main class="admin-categories">
+    <header class="header">
+
+        <h4>Leader Board</h4>
+        <mat-divider></mat-divider>
+        <section class="action-bar">
+            <mat-form-field>
+                <mat-label>Search Gift</mat-label>
+                <input type="text" matInput [formControl]="searchGift">
+            </mat-form-field>
+            <div class="add">
+            <button mat-flat-button color="primary" (click)="openGiftDialog('add')">Add Gift</button>
+        </div>
+    </section>
+</header>
+    <mat-tab-group (selectedTabChange)="handleTabChange($event)">
+        <mat-tab label="Active">
+            <app-data-grid [totalCount]="totalCount" [displayedColumns]="displayedColumns" [dataSource]="dataSource" [useColumns]="useColumns"
+            (action)="handleAction($event)"></app-data-grid>
+        </mat-tab>
+        <mat-tab label="Archived">
+            <app-data-grid [totalCount]="totalCount" [displayedColumns]="displayedColumns" [dataSource]="dataSource" [useColumns]="useColumns"
+            (action)="handleAction($event)"></app-data-grid>
+        </mat-tab>
+    </mat-tab-group>
+</main>
