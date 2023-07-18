@@ -53,6 +53,7 @@ export class CategoriesComponent implements OnInit {
       next: (response: IResponse<ICategories>) => {
         // alert(response.message)
         this.totalCount = response.totalCount;
+        // alert(this.totalCount)
         this.dataSource = response.data;
       },
       error: (response?: any) => {
@@ -111,6 +112,7 @@ export class CategoriesComponent implements OnInit {
   }
 
   handleTabChange(event : MatTabChangeEvent) {
+    this.pageNumber = 0;
     switch(event.index) {
       case 0 : 
       this.status = true;
@@ -121,6 +123,11 @@ export class CategoriesComponent implements OnInit {
       this.getAllCategories();
       break;
     }
+  }
+
+  handlePagination(pageDetails : IPagination) {
+    this.pageNumber = pageDetails.pageNumber || 0;
+    this.getAllCategories();
   }
 }
 

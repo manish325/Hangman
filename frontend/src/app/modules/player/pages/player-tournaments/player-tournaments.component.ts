@@ -1,11 +1,13 @@
 import { Dialog } from '@angular/cdk/dialog';
 import { Component, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
-import { ITournaments } from 'src/app/core/models/admin.model';
+import { ICategories, IGetTournaments, ITournaments } from 'src/app/core/models/admin.model';
 import { IResponse } from 'src/app/core/models/auth.models';
 import { AuthService } from 'src/app/core/services/auth/auth.service';
 import { PlayerDashboardService } from 'src/app/core/services/player/player-dashboard.service';
 import { AddTournamentComponent } from '../../components/add-tournament/add-tournament.component';
+import { IPagination } from 'src/app/core/models/paginator';
+import { FormControl } from '@angular/forms';
 
 @Component({
   selector: 'app-player-tournaments',
@@ -28,6 +30,14 @@ export class PlayerTournamentsComponent implements OnInit {
     ];
     dataSource : ITournaments[] = [];
 
+    pageNumber : number = 0;
+    status : boolean = true;
+    sortManner : 0 | 1 = 1;
+    totalCount !: number;
+    categories : ICategories[] = [];
+    category = new FormControl('');
+    searchTournament = new FormControl('')
+
     constructor(
       private playerService : PlayerDashboardService, 
       private authService : AuthService,
@@ -35,14 +45,28 @@ export class PlayerTournamentsComponent implements OnInit {
       ) {}
 
     ngOnInit(): void {
-      this.getTournaments()
+      this.getCateories();
+      this.getTournaments();
+      this.tournamentSearch()
     }
 
     getTournaments() {
       console.log();
-      this.playerService.getTournamentsToPlay(this.authService.getUserDetails()?.player).subscribe({
+      const payload : IGetTournaments = {
+        searchText : this.searchTournament.value || '',
+        pageNumber : this.pageNumber,
+        pageSize : 10,
+        filter : {
+          category : this.category.value || '',
+          player :  ''
+        },
+        tournamentStatus : 1,
+        sortManner : 1,
+      }
+      this.playerService.getTournamentsToPlay(this.authService.getUserDetails()?.player, payload).subscribe({
         next : (response : IResponse<ITournaments>)=>{
-            this.dataSource = response.data;
+          this.totalCount = response.totalCount;
+          this.dataSource = response.data;
         }
       })
     }
@@ -58,6 +82,39 @@ export class PlayerTournamentsComponent implements OnInit {
               alert(response.message)
             }
           })
+        }
+      })
+    }
+
+    handlePagination(pageDetails : IPagination) {
+      this.pageNumber = pageDetails.pageNumber || 0;
+      this.getTournaments();
+    }
+
+    handleAction(event : any) {
+
+    }
+
+    getCateories() {
+      const payload : IPagination = {
+        searchText :  '',
+        pageSize : Infinity,
+        pageNumber : 0,
+        sortManner : 1,
+        status : true
+      }
+    
+      this.playerService.getAllCategories(payload).subscribe({
+        next : (response : IResponse<ICategories>)=>{
+            this.categories = response.data;
+        }
+      })
+    }
+
+    tournamentSearch() {
+      this.searchTournament.valueChanges.subscribe({
+        next : (value)=>{
+          this.getTournaments();
         }
       })
     }

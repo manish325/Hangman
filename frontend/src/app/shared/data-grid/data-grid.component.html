@@ -36,6 +36,6 @@
     </ng-template>
 
     <div class="pagination" *ngIf="dataSource.length">
-        <app-paginator [count]="totalCount"></app-paginator>
+        <app-paginator [count]="totalCount" (pageDetails)="emitPageDetails($event)"></app-paginator>
     </div>
 </main>

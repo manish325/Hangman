@@ -1,4 +1,4 @@
-import { Component , EventEmitter, Input, Output } from '@angular/core';
+import { Component , EventEmitter, Input, OnChanges, OnInit, Output } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import {MatPaginatorModule} from '@angular/material/paginator';
 import { MatIconModule } from '@angular/material/icon';
@@ -22,7 +22,7 @@ const material = [
   templateUrl: './paginator.component.html',
   styleUrls: ['./paginator.component.scss']
 })
-export class PaginatorComponent {
+export class PaginatorComponent implements OnInit, OnChanges {
   @Input() count!: number;
 	@Input() pageSize = 10;
 	@Input() maxPages = 10;
@@ -39,6 +39,7 @@ export class PaginatorComponent {
 
 	}
 	ngOnInit(): void {
+		// alert(this.count)
 		this.lastPageNumber = Math.ceil(this.count / this.pageSize) - 1;
 		this.currentPageNumber = this.startPageNumber;
 		this.midPage = Math.floor(this.maxPages / 2);
@@ -48,10 +49,7 @@ export class PaginatorComponent {
 	}
 	ngOnChanges() {
 		this.utility.totalCount.subscribe((res: any) => {
-			if(this.typeOfData!=='Attendee') {
-				this.count = res;
-			}
-				this.lastPageNumber = Math.ceil(this.count / this.pageSize) - 1;
+			this.lastPageNumber = Math.ceil(this.count / this.pageSize) - 1;
 			this.startPageNumber = 0;
 			this.midPage = Math.floor(this.maxPages / 2);
 			if (this.count <= 40) {

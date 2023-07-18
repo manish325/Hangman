@@ -66,6 +66,7 @@ export class PlayersComponent implements OnInit {
   }
 
   handleTabChange(event : MatTabChangeEvent) {
+    this.pageNumber = 0;
     switch(event.index) {
       case 0 : 
       this.status = true;
@@ -111,5 +112,10 @@ export class PlayersComponent implements OnInit {
         this.getAllPlayers();
       }
     })
+  }
+
+  handlePagination(pageDetails : IPagination) {
+    this.pageNumber = pageDetails.pageNumber || 0;
+    this.getAllPlayers();
   }
 }

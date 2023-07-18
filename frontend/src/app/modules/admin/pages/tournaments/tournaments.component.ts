@@ -96,5 +96,10 @@ getTournaments() {
   })
 }
 
+handlePagination(pageDetails : IPagination) {
+  this.pageNumber = pageDetails.pageNumber || 0;
+  this.getTournaments();
+}
+
 }
 

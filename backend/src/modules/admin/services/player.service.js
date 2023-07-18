@@ -39,7 +39,7 @@ class PlayerService {
             return PLAYER;
         })
         res.status(StatusCodes.OK).json({
-            totalCount : totalPlayers,
+            totalCount : players.length,
             data : players
         })
     }

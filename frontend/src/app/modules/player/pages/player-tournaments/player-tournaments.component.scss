@@ -3,4 +3,16 @@
     border: 1px solid;
     display: flex;
     flex-direction: column;
+
+    .action-bar {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        padding: 0 1rem;
+
+        .filters {
+            display: flex;
+            gap: 1rem;
+        }
+    }
 }

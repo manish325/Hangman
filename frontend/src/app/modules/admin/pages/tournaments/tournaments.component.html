@@ -1,6 +1,6 @@
 <main class="admin-tournaments">
     <div class="header">
-        <h4>Leader Board</h4>
+        <h2>Tournaments</h2>
         <mat-divider></mat-divider>
         <section class="filter-bar">
             <div class="select-filters">
@@ -32,6 +32,6 @@
             </mat-form-field>
         </section>
     </div>
-    <app-data-grid [totalCount]="totalCount" [displayedColumns]="displayedColumns" [dataSource]="dataSource" [useColumns]="useColumns"
+    <app-data-grid (pageDetails)="handlePagination($event)" [totalCount]="totalCount" [displayedColumns]="displayedColumns" [dataSource]="dataSource" [useColumns]="useColumns"
             (action)="handleAction($event)"></app-data-grid>
 </main>

@@ -9,7 +9,8 @@ import { AuthService } from 'src/app/core/services/auth/auth.service';
   styleUrls: ['./admin-dashboard.component.scss']
 })
 export class AdminDashboardComponent {
-  navigationOptions : INavigationItem[] = []
+  navigationOptions : INavigationItem[] = [];
+  currentlyOn : string = 'leader-board'
 
   constructor(private router : Router, private authService : AuthService){
     this.navigationOptions = [
@@ -39,7 +40,7 @@ export class AdminDashboardComponent {
         routerPath : 'gifts'
       }
     ];
-    router.navigate(['admin', 'gifts'])
+    router.navigate(['admin', 'leader-board'])
   }
 
   logout() {

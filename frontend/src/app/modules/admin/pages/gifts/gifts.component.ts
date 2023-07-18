@@ -97,6 +97,7 @@ export class GiftsComponent implements OnInit {
   }
 
   handleTabChange(event : MatTabChangeEvent) {
+    this.pageNumber = 0;
     switch(event.index) {
       case 0 : 
       this.status = true;
@@ -123,5 +124,10 @@ export class GiftsComponent implements OnInit {
         this.getAllGifts();
       }
     })
+  }
+
+  handlePagination(pageDetails : IPagination) {
+    this.pageNumber = pageDetails.pageNumber || 0;
+    this.getAllGifts();
   }
 }

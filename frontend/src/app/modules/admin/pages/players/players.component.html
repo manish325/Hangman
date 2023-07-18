@@ -1,7 +1,7 @@
 <main class="admin-players">
     <header class="header">
 
-        <h4>Players</h4>
+        <h2>Players</h2>
         <mat-divider></mat-divider>
         <section class="action-bar">
             <mat-form-field>
@@ -15,11 +15,11 @@
 </header>
     <mat-tab-group (selectedTabChange)="handleTabChange($event)">
         <mat-tab label="Active">
-            <app-data-grid [totalCount]="totalCount" [displayedColumns]="displayedColumns" [dataSource]="dataSource" [useColumns]="useColumns"
+            <app-data-grid (pageDetails)="handlePagination($event)" [totalCount]="totalCount" [displayedColumns]="displayedColumns" [dataSource]="dataSource" [useColumns]="useColumns"
             (action)="handleAction($event)"></app-data-grid>
         </mat-tab>
         <mat-tab label="Archived">
-            <app-data-grid [totalCount]="totalCount" [displayedColumns]="displayedColumns" [dataSource]="dataSource" [useColumns]="useColumns"
+            <app-data-grid (pageDetails)="handlePagination($event)" [totalCount]="totalCount" [displayedColumns]="displayedColumns" [dataSource]="dataSource" [useColumns]="useColumns"
             (action)="handleAction($event)"></app-data-grid>
         </mat-tab>
     </mat-tab-group>

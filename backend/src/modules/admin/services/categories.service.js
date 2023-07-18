@@ -8,7 +8,7 @@ class CategoryService {
 
     async getAllCategories(req, res) {
         const { searchText , pageSize , pageNumber , status, sortManner} = req.body;
-        const totalCategories = await category.countDocuments({categoryStatus : status});
+        const totalCategories = (await category.find({categoryStatus : status})).length;
         const paginatedData = (pageNumber) * pageSize;
         const query = {
             categoryStatus : status
@@ -18,7 +18,7 @@ class CategoryService {
                 $regex: new RegExp(searchText, 'i')
             }
         }
-        const categories = await category.find(query).skip(paginatedData).sort({categoryName : sortManner});
+        const categories = await category.find(query).skip(paginatedData).limit(pageSize).sort({categoryName : sortManner});
         
         const allCategories = [];
         categories.map(c=>{
@@ -31,7 +31,7 @@ class CategoryService {
             )
         })
         res.status(StatusCodes.OK).json({
-            totalCount : totalCategories,
+            totalCount : allCategories.length,
             data : allCategories
         })
     }

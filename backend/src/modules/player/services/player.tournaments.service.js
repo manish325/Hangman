@@ -13,7 +13,25 @@ class PlayerTournamentService {
     }
 
     async getAllTournamentsToPlay(req, res) {
-        const tournaments = await tournment.find({status : 1, createdBy : { $ne : new mongoose.Types.ObjectId(req.params.id)}}).populate('category');
+        const { searchText , pageSize , pageNumber , tournamentStatus, sortManner, filter} = req.body;
+        const paginatedData = (pageNumber) * pageSize;
+        const query = {
+            status : tournamentStatus,
+        }
+
+        if(searchText) {
+            query.tournamentName = {
+                $regex: new RegExp(searchText, 'i')
+            }
+        }
+
+        if(filter.category) {
+            query.category = {
+                $eq : new mongoose.Types.ObjectId(filter.category)
+            }
+        }
+        const tournaments = await tournment.find({...query , status : 1, createdBy : { $ne : new mongoose.Types.ObjectId(req.params.id)}}).populate('category').limit(pageSize).sort({tournamentName : sortManner});
+        
         const tournamentsToPlay = tournaments.map(T=>{
             const tournament = {
                 tournamentName : T.tournamentName,

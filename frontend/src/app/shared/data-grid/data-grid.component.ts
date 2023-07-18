@@ -1,10 +1,11 @@
-import { Component, Input, Output, EventEmitter } from '@angular/core';
+import { Component, Input, Output, EventEmitter, OnInit, OnChanges, SimpleChanges } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { MatTableModule } from '@angular/material/table';
 import { MatCardModule } from '@angular/material/card';
 import { MatIconModule } from '@angular/material/icon';
 import { IDisplayedColumns } from 'src/app/core/models/admin.model';
 import { PaginatorComponent } from '../paginator/paginator.component';
+import { IPagination } from 'src/app/core/models/paginator';
 
 const material = [
   MatTableModule,
@@ -19,12 +20,20 @@ const material = [
   templateUrl: './data-grid.component.html',
   styleUrls: ['./data-grid.component.scss']
 })
-export class DataGridComponent {
+export class DataGridComponent implements OnInit, OnChanges {
   @Input() displayedColumns : any[] = [];
   @Input() dataSource : any[] = [];
   @Input() useColumns : string[]=  []
   @Output() action  = new EventEmitter();
   @Input() totalCount !: number;
+  @Output() pageDetails = new EventEmitter();
+
+  ngOnInit(): void {
+  }
+  
+  ngOnChanges(changes: SimpleChanges): void {
+    // alert(this.totalCount)
+  }
 
   emitAction(actionType : 'edit' | 'delete', element : any) {
         this.action.emit(
@@ -33,6 +42,10 @@ export class DataGridComponent {
             element
           }
         )
+  }
+
+  emitPageDetails(event : IPagination) {
+      this.pageDetails.emit(event);
   }
 
 }

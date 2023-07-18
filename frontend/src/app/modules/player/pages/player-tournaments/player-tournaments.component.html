@@ -1,7 +1,26 @@
 <main class="player-tournaments">
     <header>
         <h2>Tournaments</h2>
+        <div class="action-bar">
+            <div class="filters">
+                <mat-form-field>
+                    <mat-label>Select Category</mat-label>
+                <mat-select [formControl]="category">
+                    <mat-option *ngFor="let category of categories" [value]="category.categoryId">
+                        {{category.categoryName}}
+                    </mat-option>
+                </mat-select>
+            </mat-form-field>
+            <mat-form-field>
+                <mat-label>
+                    Search Tournament
+                    <!-- <mat-icon>search</mat-icon> -->
+                </mat-label>
+                <input type="text" matInput [formControl]="searchTournament">
+            </mat-form-field>
+        </div>
         <button mat-flat-button color="primary" (click)="openTournamentDialog()">Add</button>
+    </div>
     </header>
     <footer>
         <mat-tab-group>
@@ -11,7 +30,8 @@
                     Play
                 </ng-template>
 
-                <app-data-grid [dataSource]="dataSource" [displayedColumns]="displayedColumns" [useColumns]="useColumns"></app-data-grid>
+                <app-data-grid (pageDetails)="handlePagination($event)" [totalCount]="totalCount" [displayedColumns]="displayedColumns" [dataSource]="dataSource" [useColumns]="useColumns"
+            (action)="handleAction($event)"></app-data-grid>
             </mat-tab>
             <mat-tab>
                 <ng-template mat-tab-label>
@@ -19,7 +39,8 @@
                     Create
                 </ng-template>
 
-                <app-data-grid [dataSource]="dataSource" [displayedColumns]="displayedColumns" [useColumns]="useColumns"></app-data-grid>
+                <app-data-grid (pageDetails)="handlePagination($event)" [totalCount]="totalCount" [displayedColumns]="displayedColumns" [dataSource]="dataSource" [useColumns]="useColumns"
+            (action)="handleAction($event)"></app-data-grid>
             </mat-tab>
         </mat-tab-group>
     </footer>

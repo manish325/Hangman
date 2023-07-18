@@ -60,7 +60,7 @@ class TournamentService {
 
             console.log(query)
             res.status(StatusCodes.OK).json({
-                totalCount : Tournaments.length,
+                totalCount : requiredTournaments.length,
                 data : requiredTournaments
             })
         }
