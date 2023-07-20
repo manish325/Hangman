@@ -4,6 +4,7 @@ import { PlayerDashboardComponent } from './pages/player-dashboard/player-dashbo
 import { AuthGuard } from 'src/app/core/guards/auth/auth.guard';
 import { PlayerTournamentsComponent } from './pages/player-tournaments/player-tournaments.component';
 import { PlayerProgressComponent } from './pages/player-progress/player-progress.component';
+import { GameBoardComponent } from './pages/game-board/game-board.component';
 
 const routes: Routes = [
  {
@@ -18,6 +19,10 @@ const routes: Routes = [
     {
       path : 'progress',
       component : PlayerProgressComponent
+    },
+    {
+      path : 'game-board/:tournamentId',
+      component : GameBoardComponent
     },
     {
       path : '**',

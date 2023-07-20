@@ -1,0 +1,198 @@
+.game-board {
+    padding: 1rem;
+    min-height: 90vh;
+    max-height: 90vh;
+    display: grid;
+    grid-template-rows: 1fr 2fr;
+
+    .header {
+        display: flex;
+        display: grid;
+        grid-template-columns: 0.5fr 10fr;
+        flex-basis: 50%;
+
+        .go-back {
+            flex-basis: 10%;
+        }
+
+        .headings {
+            text-align: center;
+        }
+
+        .categories {
+            grid-column-start: 1;
+            grid-column-end: 3;
+        }
+
+        .timer {
+            grid-column-start: 1;
+            grid-column-end: 3;
+            display: flex;
+            flex-direction: column;
+            align-items: flex-end;
+            padding-right: 2rem;
+            
+            .mat-icon {
+                transform: scale(2);
+            margin-bottom: 1rem;
+           }
+        }
+    }
+    
+    
+    .body {
+        display: flex;
+        flex-direction: column;
+        gap: 2rem;
+
+        .word-container {
+            flex-basis: 20%;
+            display: flex;
+            align-items: center;
+            
+            .word {
+                flex: 1;
+                height: 100%;
+                display: flex;
+                align-items: center;
+                justify-content: space-between;
+                padding: 0 25%;
+
+                .letter {
+                    width: 2rem;
+                    height: 2rem;
+                    border-bottom: .25rem solid;
+                }
+            }
+
+            .mat-fab {
+                justify-self: end;
+            }
+        }
+        
+        .keyboard-container {
+            flex-basis: 80%;
+            display: flex;
+            justify-content: center;
+            
+            
+            .keyboard {
+                display: grid;
+                grid-template-columns: repeat(10, 1fr);
+                justify-content: center;
+                align-items: center;
+                box-shadow: 0 10px 20px rgba(0, 0, 0, 0.3), 0 0 40px rgba(0, 0, 0, 0.2), 0 0 60px rgba(0, 0, 0, 0.1);
+                // background-color: #3f51b5;
+                grid-column-gap: 0.5rem;
+                padding: 1rem;
+            }
+
+            .keyboard > button:nth-child(n+21):nth-child(-n+30) {
+                /* Styles for the third row */
+                grid-row: 3;
+                position: relative;
+                left: 200%;
+              }
+        }
+    }
+
+    .not-started {
+        justify-content: center;
+        align-items: center;
+        gap: 4rem;
+
+        .words-count {
+            text-align: center;
+        }
+    }
+}
+
+.hangman-container {
+    display: flex;
+    flex-direction: column;
+    width: 10vw;
+    // height: 10vh;
+
+    .bar {
+        width: 100%;
+        min-height: 100%;
+        border-left: .3rem solid;
+        border-top: 0.3rem solid;
+
+        .hangman {
+            min-height: 100%;
+            position: relative;
+            left: 4rem;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            
+            .pivot {
+                flex: 0.1;
+                border: .2rem solid;
+            }
+            
+            .head {
+                flex: 0.1;
+                border: 0.2rem solid;
+                width: 20%;
+                border-radius: 50%;
+            }
+
+            .body {
+                display: flex;
+                flex-direction: row;
+                flex: 0.1;
+                width: 20%;
+                position: relative;
+                // left: 0.3rem;
+                right: 0.2rem;
+                gap: .5rem;
+                
+                .stomach {
+                    // flex: 1;
+                    border: 0.2rem solid;
+                    min-width: 0;
+                }
+                .hand {
+                    min-width: 0;
+                    border: .2rem solid;
+                    // flex: .1;
+                    height: 2rem;
+                }
+                
+                .hand:nth-child(1) {
+                    transform: rotate(-35deg);
+                }
+
+                .sec-hand {
+                    transform: rotate(35deg);
+                }
+            }
+
+            .lower-body {
+                display: flex;
+                flex: 0.1;
+                width: 20%;
+                gap: 1rem;
+
+                .leg-1 {
+                    transform: rotate(35deg);
+                    border: 0.2rem solid;
+                }
+
+                .leg-2 {
+                    border: 0.2rem solid;
+                    transform: rotate(-35deg);
+                }
+            }
+        }
+    }
+
+    .bar-border {
+        border: 1.5rem solid black;
+        width: 40%;
+        position: relative;
+        right: 3rem;
+    }
+}

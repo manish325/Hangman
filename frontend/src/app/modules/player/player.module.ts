@@ -19,6 +19,7 @@ import { PlayerProgressComponent } from './pages/player-progress/player-progress
 import { DataGridComponent } from 'src/app/shared/data-grid/data-grid.component';
 import { AddTournamentComponent } from './components/add-tournament/add-tournament.component';
 import { ReactiveFormsModule } from '@angular/forms';
+import { GameBoardComponent } from './pages/game-board/game-board.component';
 
 const material = [
   MatTableModule,
@@ -43,7 +44,8 @@ const material = [
     PlayerDashboardComponent,
     PlayerTournamentsComponent,
     PlayerProgressComponent,
-    AddTournamentComponent
+    AddTournamentComponent,
+    GameBoardComponent
   ],
   imports: [
     CommonModule,

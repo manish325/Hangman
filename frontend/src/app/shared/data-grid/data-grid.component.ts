@@ -26,7 +26,10 @@ export class DataGridComponent implements OnInit, OnChanges {
   @Input() useColumns : string[]=  []
   @Output() action  = new EventEmitter();
   @Input() totalCount !: number;
+  @Input() viewOnly : boolean = true;
   @Output() pageDetails = new EventEmitter();
+  @Output () rowClicked = new EventEmitter();
+
 
   ngOnInit(): void {
   }
@@ -46,6 +49,10 @@ export class DataGridComponent implements OnInit, OnChanges {
 
   emitPageDetails(event : IPagination) {
       this.pageDetails.emit(event);
+  }
+
+  emitRowClick(row : any) {
+    this.rowClicked.emit(row)
   }
 
 }

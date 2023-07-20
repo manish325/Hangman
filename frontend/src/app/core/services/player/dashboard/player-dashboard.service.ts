@@ -2,9 +2,9 @@ import { ObserversModule } from '@angular/cdk/observers';
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
-import { IResponse } from '../../models/auth.models';
-import { ICategories, ITournaments } from '../../models/admin.model';
-import { IPagination } from '../../models/paginator';
+import { IResponse } from '../../../models/auth.models';
+import { ICategories, ITournaments } from '../../../models/admin.model';
+import { IPagination } from '../../../models/paginator';
 
 @Injectable({
   providedIn: 'root'

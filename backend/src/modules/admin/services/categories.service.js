@@ -31,7 +31,7 @@ class CategoryService {
             )
         })
         res.status(StatusCodes.OK).json({
-            totalCount : allCategories.length,
+            totalCount : await category.countDocuments(query),
             data : allCategories
         })
     }

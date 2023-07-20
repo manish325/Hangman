@@ -56,7 +56,8 @@ export interface IGetTournaments extends IPagination {
     filter : {
         category : string,
         player : string
-    }
+    },
+    self ? : boolean
 }
 
 export interface IGifts {
@@ -64,4 +65,15 @@ export interface IGifts {
     giftName : string,
     giftValue : string,
     quantity : string
+}
+
+export interface ILeaderboard {
+    rank : number,
+    playerName : string,
+    tournamentName : string,
+    categoryName : string,
+    score : number,
+    tournamentsPlayed : number,
+    successRate : number
+
 }

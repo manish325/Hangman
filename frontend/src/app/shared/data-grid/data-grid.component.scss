@@ -9,6 +9,10 @@
 
     .table {
         box-shadow: 0 10px 20px rgba(0, 0, 0, 0.3), 0 0 40px rgba(0, 0, 0, 0.2), 0 0 60px rgba(0, 0, 0, 0.1);
+
+        .clickable {
+            cursor: pointer !important;
+        }
     }
 
     .pagination {

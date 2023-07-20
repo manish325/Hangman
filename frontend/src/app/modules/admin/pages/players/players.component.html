@@ -15,7 +15,7 @@
 </header>
     <mat-tab-group (selectedTabChange)="handleTabChange($event)">
         <mat-tab label="Active">
-            <app-data-grid (pageDetails)="handlePagination($event)" [totalCount]="totalCount" [displayedColumns]="displayedColumns" [dataSource]="dataSource" [useColumns]="useColumns"
+            <app-data-grid [viewOnly]="false" (pageDetails)="handlePagination($event)" [totalCount]="totalCount" [displayedColumns]="displayedColumns" [dataSource]="dataSource" [useColumns]="useColumns"
             (action)="handleAction($event)"></app-data-grid>
         </mat-tab>
         <mat-tab label="Archived">

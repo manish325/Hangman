@@ -47,6 +47,7 @@ const authMiddleWare = (req, res, next)=> {
     const url = req.url;
     if(!url.includes('auth') && url !=='/admin/categories/getAllCategories') {
         const token = req.headers.authorization.split(' ')[1];
+
         const userDetails = jwt.verify(token, secretKey);
         if((req.url.includes('admin') && userDetails.roles.includes(roles.admin) )|| (req.url.includes('player') && userDetails.roles.includes(roles.player))) {
             next()

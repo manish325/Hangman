@@ -33,7 +33,7 @@ class GiftsService {
             }
         })
         res.status(StatusCodes.OK).json({
-            totalCount : giftsToSend.length,
+            totalCount : await gifts.countDocuments(query),
             data : giftsToSend
         })
     }

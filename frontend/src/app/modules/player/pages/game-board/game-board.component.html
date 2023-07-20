@@ -1,0 +1,64 @@
+<main class="game-board">
+    <header class="header">
+        <mat-icon class="go-back">arrow_back</mat-icon>
+        <div class="headings">
+            <h1 class="name">{{tournament?.tournamentName}}</h1>
+            <h2 class="details">{{tournament?.tournamentDetails}}</h2>
+            <!-- <div class="hangman-container">
+                <div class="bar">
+                    <div class="hangman">
+                        <div class="pivot"></div>
+                        <div class="head"></div>
+                        <div class="body">
+                            <div class="hand"></div>
+                            <div class="stomach"></div>
+                            <div class="hand sec-hand"></div>
+                        </div>
+                        <div class="lower-body">
+                            <div class="leg-1"></div>
+                            <div class="leg-2"></div>
+                        </div>
+                    </div>
+                </div>
+                <div class="bar-border"></div>
+            </div> -->
+        </div>
+        <h3 class="categories">Categories : {{tournament?.tournamentCategory}} </h3>
+        <div class="timer">
+            <mat-icon>access_alarm</mat-icon>
+            time
+        </div>
+    </header>
+    <div class="body" [ngClass]="{'not-started' : !gameStarted}">
+        <ng-container *ngIf="gameStarted ; else notStarted">
+            <section class="word-container">
+                <div class="word">
+                    <div class="letter" *ngFor="let control of wordControlArray.controls">
+                        {{control.value}}
+                    </div>
+                </div>
+                <button mat-fab color="primary">
+                    <mat-icon>
+                        arrow_forward
+                    </mat-icon>
+                </button>
+            </section>
+            <section class="keyboard-container">
+                <div class="keyboard">
+                    <button mat-stroked-button *ngFor="let key of keyBoardCharacters.split('')" (click)="checkAnswer(key)">
+                        {{key}}
+                    </button>
+                </div>                
+            </section>
+        </ng-container>
+        <ng-template #notStarted>
+            <div class="words-count">
+                <h2>Total Words</h2>
+                <button mat-icon-button>{{tournament?.wordsCount}}</button>
+            </div>
+            <div class="start">
+                <button mat-raised-button color="primary" (click)="gameStarted = true"> Start </button>
+            </div>
+        </ng-template>
+    </div>
+</main>

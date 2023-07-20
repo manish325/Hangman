@@ -4,10 +4,12 @@ import { MatDialog } from '@angular/material/dialog';
 import { ICategories, IGetTournaments, ITournaments } from 'src/app/core/models/admin.model';
 import { IResponse } from 'src/app/core/models/auth.models';
 import { AuthService } from 'src/app/core/services/auth/auth.service';
-import { PlayerDashboardService } from 'src/app/core/services/player/player-dashboard.service';
+import { PlayerDashboardService } from 'src/app/core/services/player/dashboard/player-dashboard.service';
 import { AddTournamentComponent } from '../../components/add-tournament/add-tournament.component';
 import { IPagination } from 'src/app/core/models/paginator';
 import { FormControl } from '@angular/forms';
+import { MatTabChangeEvent } from '@angular/material/tabs';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-player-tournaments',
@@ -37,21 +39,23 @@ export class PlayerTournamentsComponent implements OnInit {
     categories : ICategories[] = [];
     category = new FormControl('');
     searchTournament = new FormControl('')
+    self : boolean = false;
 
     constructor(
       private playerService : PlayerDashboardService, 
       private authService : AuthService,
+      private router : Router,
       private dialog: MatDialog
       ) {}
 
     ngOnInit(): void {
       this.getCateories();
       this.getTournaments();
-      this.tournamentSearch()
+      this.tournamentSearch();
+      this.router.navigate(['player/game-board/64b666308403a4a83bbdb13b'])
     }
 
     getTournaments() {
-      console.log();
       const payload : IGetTournaments = {
         searchText : this.searchTournament.value || '',
         pageNumber : this.pageNumber,
@@ -62,6 +66,7 @@ export class PlayerTournamentsComponent implements OnInit {
         },
         tournamentStatus : 1,
         sortManner : 1,
+        self : this.self
       }
       this.playerService.getTournamentsToPlay(this.authService.getUserDetails()?.player, payload).subscribe({
         next : (response : IResponse<ITournaments>)=>{
@@ -84,6 +89,12 @@ export class PlayerTournamentsComponent implements OnInit {
           })
         }
       })
+    }
+
+    handleTabChange(event : MatTabChangeEvent) {
+      this.self = !this.self;
+      this.pageNumber = 0;
+      this.getTournaments();
     }
 
     handlePagination(pageDetails : IPagination) {
@@ -117,5 +128,10 @@ export class PlayerTournamentsComponent implements OnInit {
           this.getTournaments();
         }
       })
+    }
+
+    openTournament(tournament : ITournaments) {
+
+      this.router.navigate([`player/game-board/${tournament.tournamentId}`])
     }
 }

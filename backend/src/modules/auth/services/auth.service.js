@@ -11,12 +11,11 @@ require('express-async-errors');
 class AuthService {
 
     constructor() {
-        // this.createMe();
+        this.createMe();
     }
 
     async login(req, res, next) {
         const aUser = await user.findOne({...req.body, isActive : true});
-        console.log(aUser);
         if (aUser) {
                 const payload = {
                     id: aUser._id,
@@ -36,7 +35,7 @@ class AuthService {
     async createMe() {
         // await user.deleteMany()
         const admin = await user.find({
-            username: 'ingalemanish7@gmail.com',
+            username: 'admin',
             password: 'password'
         });
         if (admin.length === 0) {
@@ -64,7 +63,6 @@ class AuthService {
 
     async changeUserStatus(req, res , next) {
         const userId = req.params.id;
-        console.log(userId)
         const aUser = await user.findOne({player :new mongoose.Types.ObjectId(userId)});
         await aUser.updateOne({
             isActive : !aUser.isActive

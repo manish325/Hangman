@@ -32,6 +32,7 @@ class PlayerService {
                 playerId : P.player?._id,
                 playerName : P.username,
                 playedTournaments : P.player?.playedTournaments.length,
+                createdTournaments : P.player.createdTournaments.length,
                 totalScores : P.player?.playedTournaments.length ? P.player?.playedTournaments.reduce((p, n)=>p+n) : 0,
                 earnedCoins : P.player?.earnedCoins,
                 password : P.password
@@ -39,7 +40,7 @@ class PlayerService {
             return PLAYER;
         })
         res.status(StatusCodes.OK).json({
-            totalCount : players.length,
+            totalCount : await player.countDocuments(query),
             data : players
         })
     }

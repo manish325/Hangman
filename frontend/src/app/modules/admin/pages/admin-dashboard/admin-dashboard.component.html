@@ -7,7 +7,7 @@
                </div>
                <div class="options-container">
                     <button  mat-raised-button [color]="currentlyOn===option.routerPath ? 'primary' : 'accent'" class="option" *ngFor="let option of navigationOptions" [routerLink]="option.routerPath"
-                    (click)="currentlyOn = option.routerPath"
+                    (click)="currentlyOn = option.routerPath" [ngClass]="{'elevated' : currentlyOn===option.routerPath}"
                     >
                         <mat-icon>{{option.icon}}</mat-icon>
                         {{option.name}}

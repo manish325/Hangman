@@ -2,11 +2,11 @@ const  {mongoose}  = require("../configs/db.config");
 
 const player = mongoose.model ('player', new mongoose.Schema( {
     playerName : String,
-    createdTournaments : [{
-        type : mongoose.Schema.Types.ObjectId,
+    createdTournaments : {
+        type : [mongoose.Types.ObjectId],
         ref : 'tournament',
         default : []
-    }],
+    },
     playedTournaments : 
        { 
            type : [{

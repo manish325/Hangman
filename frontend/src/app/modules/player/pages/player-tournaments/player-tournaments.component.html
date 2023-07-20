@@ -23,14 +23,14 @@
     </div>
     </header>
     <footer>
-        <mat-tab-group>
+        <mat-tab-group (selectedTabChange)="handleTabChange($event)">
             <mat-tab>
                 <ng-template mat-tab-label>
                     <mat-icon>videogame_asset</mat-icon>
                     Play
                 </ng-template>
 
-                <app-data-grid (pageDetails)="handlePagination($event)" [totalCount]="totalCount" [displayedColumns]="displayedColumns" [dataSource]="dataSource" [useColumns]="useColumns"
+                <app-data-grid [viewOnly]="false" (rowClicked)="openTournament($event)" (pageDetails)="handlePagination($event)" [totalCount]="totalCount" [displayedColumns]="displayedColumns" [dataSource]="dataSource" [useColumns]="useColumns"
             (action)="handleAction($event)"></app-data-grid>
             </mat-tab>
             <mat-tab>

@@ -23,6 +23,7 @@ export class PlayersComponent implements OnInit {
   useColumns: string[] = [
     'Player Name',
     'Tournaments Played',
+    'Tournaments Created',
     'Total Score',
     'Earned Coins',
     'password'

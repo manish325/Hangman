@@ -6,6 +6,7 @@ import { ICategories, IGetTournaments, IPlayer, ITournaments } from 'src/app/cor
 import { IResponse } from 'src/app/core/models/auth.models';
 import { IPagination } from 'src/app/core/models/paginator';
 import { CategoryService } from 'src/app/core/services/admin/category/category.service';
+import { PlayerService } from 'src/app/core/services/admin/player/player.service';
 import { TournamentService } from 'src/app/core/services/admin/tournament/tournament.service';
 
 @Component({
@@ -42,12 +43,15 @@ export class TournamentsComponent implements OnInit {
   constructor(
     private categoryService: CategoryService, 
     private tournamentService : TournamentService,
+    private playerService : PlayerService,
     private dialog: MatDialog,
     ) { }
 
   ngOnInit(): void {
     this.getCateories();
+    this.getPlayers();
     this.getTournaments();
+    this.filtersApplied();
   }
 
   handleAction(event : IAction<IPlayer>) {
@@ -66,6 +70,18 @@ getCateories() {
   this.categoryService.getAllCategories(payload).subscribe({
     next : (response : IResponse<ICategories>)=>{
         this.categories = response.data;
+    }
+  })
+}
+
+getPlayers() {
+  const payload  : IPagination = {
+    status : true
+  }
+
+  this.playerService.getAllPlayers(payload).subscribe({
+    next : (response : IResponse<IPlayer>)=>{
+        this.players = response.data;
     }
   })
 }
@@ -100,6 +116,19 @@ handlePagination(pageDetails : IPagination) {
   this.pageNumber = pageDetails.pageNumber || 0;
   this.getTournaments();
 }
+
+  filtersApplied() {
+    this.category.valueChanges.subscribe({
+      next : (value)=>{
+          this.getTournaments();
+      }
+    });
+    this.player.valueChanges.subscribe({
+      next : (value)=>{
+        this.getTournaments();
+      }
+    })
+  }
 
 }
 

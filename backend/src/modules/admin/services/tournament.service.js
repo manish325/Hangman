@@ -8,11 +8,18 @@ const authService = require('../../auth/services/auth.service');
 const tournment = require('../../../models/tournament');
 
 class TournamentService {
+    constructor() {
+        // this.printAllTournaments();
+    }
+
+        async printAllTournaments() {
+            const allTournaments = await tournment.find();
+            console.log(allTournaments);
+        }
         async getAllTournaments(req, res) {
 
             const { searchText , pageSize , pageNumber , tournamentStatus, sortManner, filter} = req.body;
             const paginatedData = (pageNumber) * pageSize;
-            console.log(req.body);
             const query = {
                 status : tournamentStatus,
             }
@@ -30,15 +37,13 @@ class TournamentService {
             }
 
             if(filter.player) {
-                query.player = {
+                query.createdBy = {
                     $eq : new mongoose.Types.ObjectId(filter.player)
                 }
             }
-
             const Tournaments = await tournment.find(query).skip(paginatedData).sort({tournamentName : sortManner}).populate('category').populate('createdBy');
 
             const requiredTournaments = Tournaments.map((T)=>{
-                console.log(T)
                 const t = {
                     tournamentId : T._id,
                     tournamentName : T.tournamentName,
@@ -58,9 +63,8 @@ class TournamentService {
                 return t;
             })
 
-            console.log(query)
             res.status(StatusCodes.OK).json({
-                totalCount : requiredTournaments.length,
+                totalCount : await tournment.countDocuments(query),
                 data : requiredTournaments
             })
         }
