@@ -1,5 +1,5 @@
-<main class="data-grid">
-    <table class="table" mat-table [dataSource]="dataSource" *ngIf="dataSource.length; else emptyState">
+<main class="data-grid" [ngClass]="{'empty' : !dataSource?.length}">
+    <table class="table" mat-table [dataSource]="dataSource" *ngIf="dataSource?.length; else emptyState">
         <ng-container *ngFor="let column of displayedColumns; let i=index" [matColumnDef]="column">
             <ng-container *ngIf="column!=='action'; else action">
                 <th mat-header-cell *matHeaderCellDef> {{useColumns[i]}} </th>
@@ -22,17 +22,21 @@
         <tr (click)="emitRowClick(row)" [ngClass]="{'clickable' : !viewOnly}" mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
     </table>
     <ng-template #emptyState>
-        <mat-card>
-            <mat-card-title>
+        <div class="empty-state-container">
+            <div class="public">
                 <mat-icon>public</mat-icon>
-            </mat-card-title>
-            <mat-card-content>
-                No Data Yet <mat-icon>sentiment_very_dissatisfied</mat-icon>
-            </mat-card-content>
-            <mat-card-actions>
-
-            </mat-card-actions>
-        </mat-card>
+            </div>
+            <div class="content public">
+                <h2>No Data Yet!</h2>
+                <mat-icon>sentiment_very_dissatisfied</mat-icon>
+            </div>
+            <div class="action public" *ngIf="displayedColumns.includes('action')">
+                <button mat-raised-button color="primary">
+                    Add <mat-icon>add</mat-icon>
+                </button>
+            </div>
+            
+        </div>
     </ng-template>
 
     <div class="pagination" *ngIf="dataSource.length">

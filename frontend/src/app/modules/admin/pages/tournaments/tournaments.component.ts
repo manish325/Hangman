@@ -20,13 +20,12 @@ export class TournamentsComponent implements OnInit {
     'tournamentDetails',
     'tournamentCategory',
     'tournamentPrizes',
-    'action'
   ];
   useColumns : string[] = [
-    'Tournament Name',
-    'Tournament Details',
-    'Tournament Category',
-    'Tournament Prizes'
+    'Name',
+    'Details',
+    'Category',
+    'Prizes'
   ];
   dataSource : ITournaments[] = [];
   categories : ICategories[] = [];
@@ -125,6 +124,12 @@ handlePagination(pageDetails : IPagination) {
     });
     this.player.valueChanges.subscribe({
       next : (value)=>{
+        this.getTournaments();
+      }
+    })
+
+    this.searchTournament.valueChanges.subscribe({
+      next : (v)=>{
         this.getTournaments();
       }
     })

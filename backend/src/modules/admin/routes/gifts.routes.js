@@ -4,6 +4,6 @@ const giftsRouter = require('express').Router();
 
 giftsRouter.post('/getAllGifts', giftsService.getAllGifts);
 giftsRouter.post('/addGift', giftsService.addGift);
-giftsRouter.put('/updateGift', giftsService.updateGift);
+giftsRouter.put('/updateGift/:id', giftsService.updateGift);
 giftsRouter.delete('/changeGiftStatus/:id', giftsService.changeGiftStatus)
 module.exports = giftsRouter

@@ -70,11 +70,19 @@ export class GiftsComponent implements OnInit {
     }).afterClosed().subscribe({
       next: (response ? : any) => {
         if(response) {
-          this.giftService.addGift(response.giftData as IGifts).subscribe({
-            next : (response)=>{
-              this.getAllGifts();
-            }
-          })
+          if(mode==='add') {
+            this.giftService.addGift(response.giftData as IGifts).subscribe({
+              next : (response)=>{
+                this.getAllGifts();
+              }
+            })
+          } else {
+            this.giftService.updateGift(response.giftData as IGifts).subscribe({
+              next : (response)=>{
+                this.getAllGifts();
+              }
+            })
+          }
         }
       }
     })

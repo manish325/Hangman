@@ -21,6 +21,11 @@ const player = mongoose.model ('player', new mongoose.Schema( {
     earnedCoins : {
         type : Number,
         default : 0
+    },
+    gifts : {
+        type : [mongoose.Types.ObjectId],
+        ref : 'gifts',
+        default : []
     }    
 }));
 

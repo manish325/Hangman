@@ -3,7 +3,7 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { IResponse } from '../../../models/auth.models';
-import { ICategories, ITournaments } from '../../../models/admin.model';
+import { ICategories, IGetTournaments, ITournaments } from '../../../models/admin.model';
 import { IPagination } from '../../../models/paginator';
 
 @Injectable({
@@ -11,17 +11,21 @@ import { IPagination } from '../../../models/paginator';
 })
 export class PlayerDashboardService {
 
-  constructor(private http : HttpClient) { }
+  constructor(private http: HttpClient) { }
 
-  getTournamentsToPlay(playerId : any, payload : IPagination) : Observable<IResponse<ITournaments>> {
-      return this.http.post(`player/tournaments/getAllTournamentsToPlay/${playerId}`, payload) as Observable<IResponse<ITournaments>>
+  getTournamentsToPlay(playerId: any, payload: IPagination): Observable<IResponse<ITournaments>> {
+    return this.http.post(`player/tournaments/getAllTournamentsToPlay/${playerId}`, payload) as Observable<IResponse<ITournaments>>
   }
 
-  createTournament(tournament : ITournaments) {
-      return this.http.post('player/tournaments/createTournament', tournament)
+  createTournament(tournament: ITournaments) {
+    return this.http.post('player/tournaments/createTournament', tournament)
   }
 
-  getAllCategories(payload : IPagination) : Observable<IResponse<ICategories>> {
+  getAllCategories(payload: IPagination): Observable<IResponse<ICategories>> {
     return this.http.post('admin/categories/getAllCategories', payload) as Observable<IResponse<ICategories>>;
-}
+  }
+
+  getPlayedTournaments(payload : IGetTournaments) : Observable<IResponse<ITournaments>> {
+    return this.http.post('player/tournaments/getAllPlayedTournaments', payload) as Observable<IResponse<ITournaments>>;
+  }
 }

@@ -20,6 +20,7 @@ import { DataGridComponent } from 'src/app/shared/data-grid/data-grid.component'
 import { AddTournamentComponent } from './components/add-tournament/add-tournament.component';
 import { ReactiveFormsModule } from '@angular/forms';
 import { GameBoardComponent } from './pages/game-board/game-board.component';
+import { ScoreComponent } from './pages/game-board/dialogs/score/score.component';
 
 const material = [
   MatTableModule,
@@ -45,7 +46,8 @@ const material = [
     PlayerTournamentsComponent,
     PlayerProgressComponent,
     AddTournamentComponent,
-    GameBoardComponent
+    GameBoardComponent,
+    ScoreComponent
   ],
   imports: [
     CommonModule,

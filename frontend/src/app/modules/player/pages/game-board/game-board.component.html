@@ -1,6 +1,8 @@
 <main class="game-board">
     <header class="header">
-        <mat-icon class="go-back">arrow_back</mat-icon>
+        <button mat-icon-button (click)="goBack()">
+            <mat-icon class="go-back">arrow_back</mat-icon>
+        </button>
         <div class="headings">
             <h1 class="name">{{tournament?.tournamentName}}</h1>
             <h2 class="details">{{tournament?.tournamentDetails}}</h2>
@@ -23,10 +25,25 @@
                 <div class="bar-border"></div>
             </div> -->
         </div>
-        <h3 class="categories">Categories : {{tournament?.tournamentCategory}} </h3>
+        <div class="categories">
+            <h3>
+                Categories : {{tournament?.tournamentCategory?.categoryName}}
+            </h3>
+            <h2 *ngIf="gameStarted">Hint : {{currentHint}}</h2>
+        </div>
         <div class="timer">
-            <mat-icon>access_alarm</mat-icon>
-            time
+            <div class="attempts">
+                <h2>Attempts Left </h2>
+                <mat-icon class="danger">cancel</mat-icon>
+                <h2>:</h2>
+                <p [ngClass]="{'soft-warn' : numberOfAttempts<=4, 'hard-warn' : numberOfAttempts<=2}">
+                    {{numberOfAttempts}} 
+                </p>
+            </div>
+            <div class="time">
+                <mat-icon>access_alarm</mat-icon>
+                {{time}}
+            </div>
         </div>
     </header>
     <div class="body" [ngClass]="{'not-started' : !gameStarted}">
@@ -37,7 +54,7 @@
                         {{control.value}}
                     </div>
                 </div>
-                <button mat-fab color="primary">
+                <button mat-fab color="primary" (click)="onNextQuestion()">
                     <mat-icon>
                         arrow_forward
                     </mat-icon>
@@ -57,7 +74,7 @@
                 <button mat-icon-button>{{tournament?.wordsCount}}</button>
             </div>
             <div class="start">
-                <button mat-raised-button color="primary" (click)="gameStarted = true"> Start </button>
+                <button mat-raised-button color="primary" (click)="startGame()"> Start </button>
             </div>
         </ng-template>
     </div>

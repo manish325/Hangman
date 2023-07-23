@@ -13,3 +13,12 @@
         }
     }
 }
+
+.mat-mdc-tab-group {
+    background-color: transparent !important;
+    flex: 1 !important;
+
+    .mat-mdc-tab-body-content {
+        overflow: hidden !important;
+    }
+}

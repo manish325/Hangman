@@ -14,8 +14,9 @@ const notifications = mongoose.model('notifications', new mongoose.Schema({
         ref : 'gifts'
     },
     approved : {
-        type : Boolean,
-        default : false
+        type : Number,
+        enum : [-1, 1, 0],
+        default : -11
     }
 }));
 

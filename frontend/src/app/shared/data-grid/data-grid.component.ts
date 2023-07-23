@@ -6,11 +6,13 @@ import { MatIconModule } from '@angular/material/icon';
 import { IDisplayedColumns } from 'src/app/core/models/admin.model';
 import { PaginatorComponent } from '../paginator/paginator.component';
 import { IPagination } from 'src/app/core/models/paginator';
+import { MatButtonModule } from '@angular/material/button';
 
 const material = [
   MatTableModule,
   MatCardModule,
-  MatIconModule
+  MatIconModule,
+  MatButtonModule
 ]
 
 @Component({

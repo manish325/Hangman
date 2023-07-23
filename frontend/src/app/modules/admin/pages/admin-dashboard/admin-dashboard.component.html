@@ -3,8 +3,12 @@
         <mat-drawer mode="side" opened>
             <section class="drawer-content">
                <div class="heading">
-                <h1>ADMIN</h1>
-               </div>
+                   <h1>ADMIN</h1>
+                <div class="avatar">
+                    {{currentUser}}
+                </div>
+               </div>.
+               <mat-divider></mat-divider>
                <div class="options-container">
                     <button  mat-raised-button [color]="currentlyOn===option.routerPath ? 'primary' : 'accent'" class="option" *ngFor="let option of navigationOptions" [routerLink]="option.routerPath"
                     (click)="currentlyOn = option.routerPath" [ngClass]="{'elevated' : currentlyOn===option.routerPath}"
@@ -13,8 +17,12 @@
                         {{option.name}}
                     </button >
                </div>
+               <mat-divider></mat-divider>
                <div class="switch-role">
-                    <button mat-raised-button color="primary" (click)="logout()">Logout</button>
+                    <button mat-raised-button color="primary" (click)="logout()">
+                        <span class="logout">Logout</span>
+                        <mat-icon>exit_to_app</mat-icon>
+                    </button>
                </div>
             </section>
         </mat-drawer>

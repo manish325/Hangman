@@ -1,7 +1,10 @@
 export interface ITournamentDetails {
     tournamentName : string,
     tournamentDetails : string,
-    tournamentCategory : string,
+    tournamentCategory : {
+        categoryId : string,
+        categoryName : string
+    },
     wordsCount : number,
     tournamentPrizes : Array<number>,
     words : {
@@ -9,4 +12,11 @@ export interface ITournamentDetails {
         word : string,
         hint : string
     }[]
+}
+
+export interface IScore {
+    playerId : string,
+    tournamentId : string,
+    categoryId : string,
+    score : number
 }

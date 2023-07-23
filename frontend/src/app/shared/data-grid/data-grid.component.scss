@@ -8,14 +8,56 @@
     gap: 1rem;
 
     .table {
-        box-shadow: 0 10px 20px rgba(0, 0, 0, 0.3), 0 0 40px rgba(0, 0, 0, 0.2), 0 0 60px rgba(0, 0, 0, 0.1);
+        // box-shadow: 0 10px 20px rgba(0, 0, 0, 0.3), 0 0 40px rgba(0, 0, 0, 0.2), 0 0 60px rgba(0, 0, 0, 0.1);
+        box-shadow:
+        0 6px 8px -6px rgba(0, 0, 0, 0.8), /* Top shadow */
+        0 8px 12px -8px rgba(0, 0, 0, 0.6), /* Elevated shadow */
+        0 20px 30px -18px rgba(0, 0, 0, 0.4); 
 
         .clickable {
             cursor: pointer !important;
         }
     }
 
+    .empty-state-container {
+        display: flex;
+        flex-direction: column;
+        min-width: 50%;
+        min-height: 50%;
+        border-radius: 1rem;
+        background-color: #fff;
+        color: black !important;
+        padding: 1rem;
+        gap: 2rem;
+
+        .public {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .content {
+            gap: 1rem;
+
+            .mat-icon {
+                margin-bottom: .85rem;
+            }
+        }
+
+        .action {
+
+        }
+
+        .mat-icon {
+            transform: scale(2);
+        }
+    }
+
     .pagination {
         min-width: 100%;
     }
+}
+
+.empty {
+    justify-content: center !important;
 }

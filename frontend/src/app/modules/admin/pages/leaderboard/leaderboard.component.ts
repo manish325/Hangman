@@ -2,7 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { FormControl } from '@angular/forms';
 import { IAction } from 'src/app/core/models/action';
-import { ICategories, IDisplayedColumns, IGetTournaments, IPlayer, ITournaments } from 'src/app/core/models/admin.model';
+import { ICategories, IDisplayedColumns, IGetLeaderboard, IGetTournaments, ILeaderboard, IPlayer, ITournaments } from 'src/app/core/models/admin.model';
 import { IResponse } from 'src/app/core/models/auth.models';
 import { IPagination } from 'src/app/core/models/paginator';
 import { CategoryService } from 'src/app/core/services/admin/category/category.service';
@@ -16,17 +16,24 @@ import { AuthService } from 'src/app/core/services/auth/auth.service';
   styleUrls: ['./leaderboard.component.scss']
 })
 export class LeaderboardComponent implements OnInit {
-    displayedColumns : string[] = [];
+    displayedColumns : string[] = [
+      'playerName',
+      'tournamentName',
+      'categoryName',
+      'score'
+    ];
     useColumns : string[] = [
       'Name',
-      'Played Tournaments',
-      'Total Score',
-      'Earned Coins'
+      'Tournament',
+      'Category',
+      'Score',
     ];
-    dataSource : IPlayer[] = [];
+    dataSource : any[] = [];
     categories : ICategories[] = [];
     tournaments : ITournaments[] = [];
     totalCount !: number;
+    leaderboardData : ILeaderboard[] = [];
+    pageNumber : number = 0;
 
     category = new FormControl('');
     tournament = new FormControl('')
@@ -37,59 +44,26 @@ export class LeaderboardComponent implements OnInit {
       private leaderboardService : LeaderboardService,
       private tournamentService : TournamentService
       ) {
-      this.dataSource = [
-        {
-          playerName : 'Manish Ingale',
-          playedTournaments : 50,
-          totalScore : 3000,
-          earnedCoins : 5000,
-        },
-        {
-          playerName : 'Manish Ingale',
-          playedTournaments : 50,
-          totalScore : 3000,
-          earnedCoins : 5000,
-        },
-        {
-          playerName : 'Manish Ingale',
-          playedTournaments : 50,
-          totalScore : 3000,
-          earnedCoins : 5000,
-        },
-        {
-          playerName : 'Manish Ingale',
-          playedTournaments : 50,
-          totalScore : 3000,
-          earnedCoins : 5000,
-        },
-        {
-          playerName : 'Manish Ingale',
-          playedTournaments : 50,
-          totalScore : 3000,
-          earnedCoins : 5000,
-        }
-      ];
-
-      this.displayedColumns = Object.keys(this.dataSource[0]);
-      this.displayedColumns.push('action');
+      
+      // this.displayedColumns = Object.keys(this.dataSource[0]);
+      // this.displayedColumns.push('action');
     }
 
     ngOnInit(): void {
-      this.http.post('admin/leaderboard/getLeaderboardData', {
-        userId : this.authService.getUserDetails()?._id
-      }).subscribe({
-        next : (response : any)=> {
-          // alert(response.message)
-        }
-      })
-
       this.getCateories();
       this.getTournaments();
-
+      this.getLeaderboardData();
       this.category.valueChanges.subscribe({
         next : (value)=>{
           this.getTournaments();
+          this.getLeaderboardData();
         },
+      })
+
+      this.tournament.valueChanges.subscribe({
+        next : (value)=>{
+          this.getLeaderboardData();
+        }
       })
     }
 
@@ -133,6 +107,32 @@ export class LeaderboardComponent implements OnInit {
       this.tournamentService.getTournaments(payload).subscribe({
         next : (response : IResponse<ITournaments>)=>{
           this.tournaments = response.data;
+        }
+      })
+    }
+
+    getLeaderboardData() {
+      const payload : IGetLeaderboard = {
+        searchText : '',
+        pageSize : 10,
+        pageNumber : this.pageNumber,
+        filter : {
+          category : this.category.value || '',
+          tournament : this.tournament.value || ''
+        }
+      }
+      this.leaderboardService.getLeaderBoardData(payload).subscribe({
+        next : (response : IResponse<ILeaderboard>) => {
+            this.leaderboardData = response.data;
+            this.totalCount = response.totalCount;
+            this.dataSource = this.leaderboardData.map(l=>{
+              return {
+                playerName : l.player.playerName,
+                tournamentName : l.tournament.tournamentName,
+                categoryName : l.category.categoryName,
+                score : l.score
+              }
+            })
         }
       })
     }

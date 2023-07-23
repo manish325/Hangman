@@ -17,7 +17,7 @@ export class GiftService {
   }
 
   updateGift(gift : IGifts) {
-
+      return this.http.put('admin/gifts/updateGift'+'/'+ gift.giftId, gift)
   }
 
   changeGiftStatus(gift : IGifts) {

@@ -20,7 +20,8 @@ class AuthService {
                 const payload = {
                     id: aUser._id,
                     username: aUser.username,
-                    roles: aUser.roles
+                    roles: aUser.roles,
+                    player : aUser.player
                 }
                 const token = JSON.sign(payload, secretKey);
                 await res.status(200).json({

@@ -10,7 +10,7 @@ import { AuthService } from 'src/app/core/services/auth/auth.service';
 })
 export class PlayerDashboardComponent {
   navigationOptions : INavigationItem[] = []
-
+  playerName : string = '';
   constructor(private router : Router, private authService : AuthService){
     this.navigationOptions = [
       {
@@ -39,6 +39,7 @@ export class PlayerDashboardComponent {
         routerPath : 'gifts'
       }
     ];
+    this.playerName = authService.getUserDetails()?.username || '';
     router.navigate(['player', 'tournaments'])
   }
 

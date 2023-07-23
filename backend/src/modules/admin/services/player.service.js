@@ -9,7 +9,9 @@ const authService = require('../../auth/services/auth.service');
 
 class PlayerService {
 
-    constructor(){  }
+    constructor(){ 
+        // this.updateAllPlayers()
+     }
 
     async getAllPlayers(req, res) {
         const { searchText , pageSize , pageNumber , status, sortManner} = req.body;
@@ -26,21 +28,22 @@ class PlayerService {
             }
         }
         const userPlayers = await user.find(query).skip(paginatedData).sort({username : sortManner}).populate('player');
+        console.log(userPlayers)
         const totalPlayers = userPlayers.length;
         const players = userPlayers.map((P)=>{
             const PLAYER = {
                 playerId : P.player?._id,
                 playerName : P.username,
                 playedTournaments : P.player?.playedTournaments.length,
-                createdTournaments : P.player.createdTournaments.length,
-                totalScores : P.player?.playedTournaments.length ? P.player?.playedTournaments.reduce((p, n)=>p+n) : 0,
+                createdTournaments : P.player?.createdTournaments.length,
+                totalScore : P.player?.playedTournaments.length ? P.player?.playedTournaments.map(pt=>pt.score).reduce((p, n)=>p+n) : 0,
                 earnedCoins : P.player?.earnedCoins,
                 password : P.password
             } 
             return PLAYER;
         })
         res.status(StatusCodes.OK).json({
-            totalCount : await player.countDocuments(query),
+            totalCount : await user.countDocuments(query),
             data : players
         })
     }
@@ -57,6 +60,12 @@ class PlayerService {
         res.status(StatusCodes.OK).json({
             message : 'Player archived!'
         })
+    }
+
+    async updateAllPlayers() {
+        await player.updateMany({
+            gifts : []
+        });
     }
 }
 

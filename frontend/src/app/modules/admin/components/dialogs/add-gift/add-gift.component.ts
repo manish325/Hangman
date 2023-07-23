@@ -3,6 +3,7 @@ import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { GiftService } from 'src/app/core/services/admin/gifts/gift.service';
 import { AddCategoryComponent } from '../add-category/add-category.component';
+import { IGifts } from 'src/app/core/models/admin.model';
 
 @Component({
   selector: 'app-add-gift',
@@ -29,8 +30,12 @@ export class AddGiftComponent implements OnInit {
 
   onSubmit() {
     if(this.giftForm.valid) {
+      const gift : IGifts = this.giftForm.value as IGifts;
+      if(this.data.mode === 'edit'){
+        gift.giftId = this.data.gift.giftId
+      }
       this.dialogRef.close({
-        giftData : this.giftForm.value
+        giftData : gift
       })
     }
   }

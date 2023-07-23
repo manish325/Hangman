@@ -11,7 +11,7 @@ import { AuthService } from 'src/app/core/services/auth/auth.service';
 export class AdminDashboardComponent {
   navigationOptions : INavigationItem[] = [];
   currentlyOn : string = 'leader-board'
-
+  currentUser : string = '';
   constructor(private router : Router, private authService : AuthService){
     this.navigationOptions = [
       {
@@ -40,6 +40,7 @@ export class AdminDashboardComponent {
         routerPath : 'gifts'
       }
     ];
+    this.currentUser = `${authService.getUserDetails()?.username.split(' ')[0]?.[0]}${authService.getUserDetails()?.username.split(' ')[1]?.[0] || ''}`.toUpperCase()
     router.navigate(['admin', 'leader-board'])
   }
 

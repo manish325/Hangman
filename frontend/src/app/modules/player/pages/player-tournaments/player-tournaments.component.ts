@@ -40,6 +40,7 @@ export class PlayerTournamentsComponent implements OnInit {
     category = new FormControl('');
     searchTournament = new FormControl('')
     self : boolean = false;
+    currentTabIndex : number = 0;
 
     constructor(
       private playerService : PlayerDashboardService, 
@@ -52,7 +53,6 @@ export class PlayerTournamentsComponent implements OnInit {
       this.getCateories();
       this.getTournaments();
       this.tournamentSearch();
-      this.router.navigate(['player/game-board/64b666308403a4a83bbdb13b'])
     }
 
     getTournaments() {
@@ -72,6 +72,19 @@ export class PlayerTournamentsComponent implements OnInit {
         next : (response : IResponse<ITournaments>)=>{
           this.totalCount = response.totalCount;
           this.dataSource = response.data;
+          this.displayedColumns = [
+            'tournamentName',
+            'tournamentDetails',
+            'tournamentCategory',
+            'tournamentPrizes',
+            'action'
+          ];
+          this.useColumns = [
+            'Tournament Name',
+            'Tournament Details',
+            'Tournament Category',
+            'Tournament Prizes'
+          ];
         }
       })
     }
@@ -92,14 +105,26 @@ export class PlayerTournamentsComponent implements OnInit {
     }
 
     handleTabChange(event : MatTabChangeEvent) {
-      this.self = !this.self;
+      this.currentTabIndex = event.index;
+      this.dataSource = [];
       this.pageNumber = 0;
-      this.getTournaments();
+      if(event.index ===0 || event.index === 1) {
+        this.self = !this.self;
+        this.getTournaments();
+      }
+      if(event.index===2) {
+        this.getPlayedTournaments();
+      }
     }
 
     handlePagination(pageDetails : IPagination) {
       this.pageNumber = pageDetails.pageNumber || 0;
+      if(this.currentTabIndex === 0 || this.currentTabIndex === 1)
       this.getTournaments();
+
+      if(this.currentTabIndex === 2) {
+        this.getPlayedTournaments();
+      }
     }
 
     handleAction(event : any) {
@@ -123,15 +148,53 @@ export class PlayerTournamentsComponent implements OnInit {
     }
 
     tournamentSearch() {
+      this.category.valueChanges.subscribe({
+        next : (v)=>{
+          if(this.currentTabIndex === 0 || this.currentTabIndex === 1)
+          this.getTournaments();
+
+          if(this.currentTabIndex === 2) {
+            this.getPlayedTournaments();
+          }
+        }
+      })
       this.searchTournament.valueChanges.subscribe({
         next : (value)=>{
+          if(this.currentTabIndex === 0 || this.currentTabIndex === 1)
           this.getTournaments();
+
+          if(this.currentTabIndex === 2) {
+            this.getPlayedTournaments();
+          }
+
         }
       })
     }
 
     openTournament(tournament : ITournaments) {
-
       this.router.navigate([`player/game-board/${tournament.tournamentId}`])
+    }
+
+    getPlayedTournaments() {
+      const payload : IGetTournaments = {
+        searchText : this.searchTournament.value || '',
+        pageNumber : this.pageNumber,
+        pageSize : 10,
+        filter : {
+          category : this.category.value || '',
+          player :  ''
+        },
+        tournamentStatus : 1,
+        sortManner : 1,
+      }
+
+      this.playerService.getPlayedTournaments(payload).subscribe({
+        next : (response : IResponse<ITournaments>)=>{
+            this.dataSource = response.data;
+            this.totalCount = response.totalCount;
+            this.displayedColumns = Object.keys(this.dataSource[0]).filter(K=>K!=='tournamentId');
+            this.useColumns.push('Score')
+        }
+      })
     }
 }

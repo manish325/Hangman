@@ -33,14 +33,6 @@ const playerAuthMiddleware  = async (req, res, next)=>{
     }
 }
 
-// const authMiddleWare = (role)=> {
-//     switch(role) {
-//         case 'admin' : 
-//         return adminAuthMiddleware;
-//         case 'player' : 
-//         return playerAuthMiddleware
-//     }
-// }
 
 const authMiddleWare = (req, res, next)=> {
 
@@ -50,6 +42,7 @@ const authMiddleWare = (req, res, next)=> {
 
         const userDetails = jwt.verify(token, secretKey);
         if((req.url.includes('admin') && userDetails.roles.includes(roles.admin) )|| (req.url.includes('player') && userDetails.roles.includes(roles.player))) {
+            req.userDetails = userDetails;
             next()
         } else 
         throw new UnauthorizedError(res , 'Access Denied');

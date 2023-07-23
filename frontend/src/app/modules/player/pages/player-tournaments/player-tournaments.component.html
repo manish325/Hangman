@@ -22,7 +22,7 @@
         <button mat-flat-button color="primary" (click)="openTournamentDialog()">Add</button>
     </div>
     </header>
-    <footer>
+    <footer class="footer">
         <mat-tab-group (selectedTabChange)="handleTabChange($event)">
             <mat-tab>
                 <ng-template mat-tab-label>
@@ -41,6 +41,15 @@
 
                 <app-data-grid (pageDetails)="handlePagination($event)" [totalCount]="totalCount" [displayedColumns]="displayedColumns" [dataSource]="dataSource" [useColumns]="useColumns"
             (action)="handleAction($event)"></app-data-grid>
+            </mat-tab>
+            <mat-tab>
+                <ng-template mat-tab-label>
+                    <mat-icon>play_circle_filled</mat-icon>
+                    Played
+                </ng-template>
+
+                <app-data-grid (pageDetails)="handlePagination($event)" [totalCount]="totalCount" [displayedColumns]="displayedColumns" [dataSource]="dataSource" [useColumns]="useColumns"
+                (action)="handleAction($event)"></app-data-grid>
             </mat-tab>
         </mat-tab-group>
     </footer>

@@ -13,3 +13,24 @@
         }
     }
 }
+
+.mat-drawer {
+    background: linear-gradient(45deg, #2ecc71, #bdc3c7),
+	repeating-linear-gradient(-45deg, transparent, transparent 5px, #2ecc71 5px, #2ecc71 10px) !important;
+}
+
+.mat-drawer-content {
+    background: linear-gradient(45deg, #2ecc71, #c8d1cd),
+    repeating-linear-gradient(-45deg, transparent, transparent 5px, #2ecc71 5px, #2ecc71 10px) !important;
+}
+
+.mat-mdc-cell, .mat-mdc-header-cell {
+    border-right: 0.1rem solid #bdc3c7 !important;
+    text-align: center !important;
+    color: white !important;
+    background-color:  #4CAF50 !important;
+}
+
+.mat-mdc-header-cell {
+    border-bottom: 1rem solid black;
+}

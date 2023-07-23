@@ -97,12 +97,18 @@ export class PlayersComponent implements OnInit {
 
     this.playerService.getAllPlayers(payload).subscribe({
       next : (response : IResponse<IPlayer>)=>{
-        this.totalCount = response.totalCount;
-        this.dataSource = response.data.filter(r=>r.password !== 'rohitP');
-        if(this.dataSource.length) {
-          this.displayedColumns = Object.keys(this.dataSource[0]).filter(k=>!k.includes('Id'));
-          this.displayedColumns.push('action')
+        try {
+
+          this.totalCount = response.totalCount;
+          this.dataSource = response.data;
+          if(this.dataSource.length) {
+            this.displayedColumns = Object.keys(this.dataSource[0]).filter(k=>!k.includes('Id'));
+          this.displayedColumns.push('action');
+          console.log(this.displayedColumns)
         }
+      } catch(e) {
+        alert(e)
+      }
       }
     })
   }

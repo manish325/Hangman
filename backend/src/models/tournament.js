@@ -10,7 +10,7 @@ const tournment = mongoose.model('tournament', new mongoose.Schema( {
     status : {
         type : Number,
         enum : [-1, 1, 0],
-        default : 1
+        default : -1
     },
     category :  {
         type : mongoose.Types.ObjectId,

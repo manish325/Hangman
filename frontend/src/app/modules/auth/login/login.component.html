@@ -1,13 +1,13 @@
 <main class="login">
     <div class="logo">
-        <marquee behavior="" direction="" class="marquee">
-            <!-- <img src="./../../../../assets/images/Hangman.png" alt=""> -->
-        </marquee>
+        <div behavior="" direction="" class="marquee">
+            <img src="./../../../../assets/images/hangman-logo.png" alt="">
+        </div>
     </div>
     <div class="content" [ngClass]="{'spinner' : formSubmitted}">
         <ng-container *ngIf="!formSubmitted">
             <div class="heading">
-                <h1>Welcome</h1>
+                <h1>Hangman</h1>
             </div>
             <div class="form">
                 <form [formGroup]="loginForm" (ngSubmit)="login()">

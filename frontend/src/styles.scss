@@ -5,7 +5,11 @@
 @import "./theme/common-styles/tabs.scss";
 
 html, body { height: 100%; }
-body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+body { 
+	margin: 0; 
+	overflow: hidden;
+	
+}
 
 ::-webkit-scrollbar-track {
 	border-radius: 0;
@@ -31,4 +35,26 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
 	background: rgb(206, 199, 199);;
 	border: 2px solid rgb(206, 199, 199);
 	background-clip: padding-box;
+}
+
+* :not(.mat-icon){
+	
+	// font-family: 'Luckiest Guy', cursive !important;
+	// font-family: 'Anton', sans-serif !important;
+	// font-family: 'Press Start 2P', cursive !important;
+	font-family: 'Changa One', cursive !important;
+	font-size: large;
+	
+
+}
+
+th {
+	font-weight: bolder !important;
+}
+
+.mat-mdc-select-panel {
+	background-color: #fff !important;
+	gap: 1rem !important;
+	display: flex !important;
+	flex-direction: column !important;
 }

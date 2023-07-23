@@ -48,7 +48,9 @@ export interface ITournaments {
         word : string,
         hint : string
     }[],
-    playerId  : string | any
+    playerId  : string | any,
+    played : boolean,
+    score ? : number
 }
 
 export interface IGetTournaments extends IPagination {
@@ -68,12 +70,25 @@ export interface IGifts {
 }
 
 export interface ILeaderboard {
-    rank : number,
-    playerName : string,
-    tournamentName : string,
-    categoryName : string,
+    player : {
+        playerId : string,
+        playerName : string
+    },
+    tournament : {
+        tournamentId : string,
+        tournamentName : string
+    },
+    category : {
+        categoryId : string,
+        categoryName : string
+    },
     score : number,
-    tournamentsPlayed : number,
-    successRate : number
+    tournamentsPlayed : number
+}
 
+export interface IGetLeaderboard extends IPagination {
+    filter : {
+        category : string,
+        tournament : string
+    }
 }
