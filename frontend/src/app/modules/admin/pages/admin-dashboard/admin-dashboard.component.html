@@ -1,33 +1,39 @@
-<main class="admin-dashboard">
-    <mat-drawer-container class="sidenav-container">
-        <mat-drawer mode="side" opened>
-            <section class="drawer-content">
-               <div class="heading">
-                   <h1>ADMIN</h1>
-                <div class="avatar">
-                    {{currentUser}}
-                </div>
-               </div>.
-               <mat-divider></mat-divider>
-               <div class="options-container">
-                    <button  mat-raised-button [color]="currentlyOn===option.routerPath ? 'primary' : 'accent'" class="option" *ngFor="let option of navigationOptions" [routerLink]="option.routerPath"
-                    (click)="currentlyOn = option.routerPath" [ngClass]="{'elevated' : currentlyOn===option.routerPath}"
-                    >
-                        <mat-icon>{{option.icon}}</mat-icon>
-                        {{option.name}}
-                    </button >
-               </div>
-               <mat-divider></mat-divider>
-               <div class="switch-role">
-                    <button mat-raised-button color="primary" (click)="logout()">
-                        <span class="logout">Logout</span>
-                        <mat-icon>exit_to_app</mat-icon>
-                    </button>
-               </div>
-            </section>
-        </mat-drawer>
-        <mat-drawer-content>
-            <router-outlet></router-outlet>
-        </mat-drawer-content>
-      </mat-drawer-container>
-</main>
+<app-notification-panel>
+    <main class="admin-dashboard">
+        <mat-drawer-container class="sidenav-container">
+            <mat-drawer mode="side" opened>
+                <section class="drawer-content">
+                    <div class="heading">
+                        <h1>ADMIN</h1>
+                        <div class="avatar">
+                            {{currentUser}}
+                        </div>
+                    </div>.
+                    <mat-divider></mat-divider>
+                    <div class="options-container">
+                        <button mat-raised-button [color]="currentlyOn===option.routerPath ? 'primary' : 'accent'"
+                            class="option" *ngFor="let option of navigationOptions" [routerLink]="option.routerPath"
+                            (click)="currentlyOn = option.routerPath"
+                            [ngClass]="{'elevated' : currentlyOn===option.routerPath}">
+                            <mat-icon>{{option.icon}}</mat-icon>
+                            {{option.name}}
+                        </button>
+                    </div>
+                    <mat-divider></mat-divider>
+                    <div class="switch-role">
+                        <button mat-fab (click)="notificationService.isNotificationPanelOpen=!notificationService.isNotificationPanelOpen">
+                            <mat-icon>notifications</mat-icon>
+                        </button>
+                        <button mat-raised-button color="primary" (click)="logout()">
+                            <span class="logout">Logout</span>
+                            <mat-icon>exit_to_app</mat-icon>
+                        </button>
+                    </div>
+                </section>
+            </mat-drawer>
+            <mat-drawer-content>
+                <router-outlet></router-outlet>
+            </mat-drawer-content>
+        </mat-drawer-container>
+    </main>
+</app-notification-panel>

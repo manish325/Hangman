@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
 import { INavigationItem } from 'src/app/core/models/admin.model';
+import { NotificationService } from 'src/app/core/services/admin/notification/notification.service';
 import { AuthService } from 'src/app/core/services/auth/auth.service';
 
 @Component({
@@ -12,7 +13,7 @@ export class AdminDashboardComponent {
   navigationOptions : INavigationItem[] = [];
   currentlyOn : string = 'leader-board'
   currentUser : string = '';
-  constructor(private router : Router, private authService : AuthService){
+  constructor(private router : Router, private authService : AuthService, public notificationService : NotificationService){
     this.navigationOptions = [
       {
         name : 'LeaderBoard',

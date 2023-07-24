@@ -48,8 +48,8 @@ export interface ITournaments {
         word : string,
         hint : string
     }[],
-    playerId  : string | any,
-    played : boolean,
+    playerId ? : string | any,
+    played ?: boolean,
     score ? : number
 }
 

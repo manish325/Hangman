@@ -1,0 +1,55 @@
+.panel {
+    display: flex;
+    min-height: 100vh;
+    padding: 1rem;
+    flex-direction: column;
+    max-width: 20vw;
+    gap: 2rem;
+    max-height: 100vh;
+    overflow-y: scroll;
+    overflow-x: hidden;
+    box-sizing: border-box;
+
+    .empty-state-container {
+        display: flex;
+        flex-direction: column;
+        min-width: 50%;
+        min-height: 50%;
+        border-radius: 1rem;
+        background-color: #fff;
+        color: black !important;
+        padding: 1rem;
+        gap: 2rem;
+
+        .public {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .content {
+            gap: 1rem;
+
+            .mat-icon {
+                margin-bottom: .85rem;
+            }
+        }
+
+        .action {
+
+        }
+
+        .mat-icon {
+            transform: scale(2);
+        }
+    }
+}
+
+.empty {
+    justify-content: center;
+    align-items: center;
+}
+
+.panel ::-webkit-scrollbar, ::-webkit-scrollbar-track {
+    display: none !important;
+}

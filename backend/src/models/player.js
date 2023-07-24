@@ -22,11 +22,10 @@ const player = mongoose.model ('player', new mongoose.Schema( {
         type : Number,
         default : 0
     },
-    gifts : {
-        type : [mongoose.Types.ObjectId],
-        ref : 'gifts',
-        default : []
-    }    
+    gifts: [{
+        giftId: { type: mongoose.Types.ObjectId, ref: 'gifts' }, // Reference to the 'gifts' collection
+        giftQuantity: Number,
+      }]
 }));
 
 module.exports = player;

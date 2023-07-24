@@ -1,0 +1,24 @@
+<mat-sidenav-container>
+    <mat-sidenav [opened]="notificationService.isNotificationPanelOpen" [fixedInViewport]="true" [mode]="'over'" (closed)="notificationService.isNotificationPanelOpen = !notificationService.isNotificationPanelOpen" [position]="'end'">
+        <main class="panel" [ngClass]="{'empty' : notifications?.length==0}">
+            <ng-container *ngIf="notifications?.length; else empty">
+                <app-notification *ngFor="let notification of notifications" [notification]="notification" (notificationAction)="notificationAction($event)"></app-notification>
+            </ng-container>
+            <ng-template #empty>
+                <div class="empty-state-container">
+                    <div class="public">
+                        <mat-icon>public</mat-icon>
+                    </div>
+                    <div class="content public">
+                        <h2>No Notifications Yet!</h2>
+                        <mat-icon>sentiment_very_dissatisfied</mat-icon>
+                    </div>                    
+                </div>
+            </ng-template>
+        </main>
+    </mat-sidenav>
+
+    <mat-sidenav-content>
+        <ng-content></ng-content>
+    </mat-sidenav-content>
+</mat-sidenav-container>

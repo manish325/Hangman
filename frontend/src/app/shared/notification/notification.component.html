@@ -1,0 +1,30 @@
+<main class="notification-container" [ngClass]="{'row' : (notification.notificationStatus === 1 || notification.notificationStatus === 0), 'column' : notification.notificationStatus === -1}">
+    <section class="notification">
+        <p *ngIf="notification.tournament">
+            <span class="highlight"> {{notification.player.playerName}}</span>  has Requested to host <span class="highlight">{{notification.tournament?.tournamentName}}</span> on platform.
+        </p>
+
+        <p *ngIf="notification.gift?.length">
+            <span class="highlight">{{notification.player.playerName}}</span> has claimed {{notification.gift?.length===1 ? 'Gift' : 'Gifts'}} 
+            <span *ngFor="let gift of notification.gift; let i=index ">
+                <span class="highlight">{{gift.giftName}}</span> <span *ngIf="i!==notification.gift?.length || 1-1">,</span> 
+            </span>
+        </p>
+    </section>
+    <div class="action" *ngIf="notification.notificationStatus === -1; else status">
+        <button mat-flat-button color="primary" (click)="emitNotificationAction(1)">
+            Approve
+        </button>
+        <button mat-flat-button color="warn" (click)="emitNotificationAction(0)">
+            Reject
+        </button>
+    </div>
+    <ng-template #status >
+        <div class="status">
+            <mat-icon *ngIf="notification.notificationStatus===1">check_circle</mat-icon>
+            <mat-icon *ngIf="notification.notificationStatus===0">cancel</mat-icon>
+        </div>
+    </ng-template>
+</main>
+
+<mat-divider></mat-divider>

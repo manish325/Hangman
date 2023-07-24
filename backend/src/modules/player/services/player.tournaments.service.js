@@ -18,7 +18,6 @@ class PlayerTournamentService {
         const { searchText , pageSize , pageNumber , tournamentStatus, sortManner, filter, self} = req.body;
         const paginatedData = (pageNumber) * pageSize;
         const query = {
-            status : tournamentStatus,
             createdBy : self ? {$eq : new mongoose.Types.ObjectId(req.params.id)} :{ $ne : new mongoose.Types.ObjectId(req.params.id)}
         }
 
@@ -92,7 +91,7 @@ class PlayerTournamentService {
         })
     }
 
-    async addTournamentToPlayerRecord(req, res) {
+    async addTournamentToPlayerRecord(req, res, next) {
         let query;
         if(req.played) {
             query = {
@@ -111,10 +110,8 @@ class PlayerTournamentService {
             }
         }
         const Player = await player.findOne({_id : new mongoose.Types.ObjectId(req.userDetails.player)}).updateOne(query);
-
-        res.status(StatusCodes.CREATED).json({
-            message : 'Tournament Created By '
-        })
+        req.customMessage = 'Tournament Created!'
+        next();
     }
 
     async printAllPlayers() {

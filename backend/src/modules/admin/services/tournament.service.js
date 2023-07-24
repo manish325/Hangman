@@ -68,6 +68,10 @@ class TournamentService {
                 data : requiredTournaments
             })
         }
+
+        async updateTournamentStatus(req, res, next) {
+            
+        } 
 }
 
 module.exports = new TournamentService();

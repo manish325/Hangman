@@ -76,6 +76,10 @@ class GiftsService {
             message : 'Gift Updated!'
         })
     }
+
+    async updateGiftQuantity(req, res) {
+        
+    }
 }
 
 module.exports = new GiftsService();

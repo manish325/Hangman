@@ -70,15 +70,12 @@
         .switch-role {
             flex-basis: 15vh;
             margin-bottom: 0.1rem;
-            justify-content: end;
+            justify-content: center;
             padding: 1rem 0.5rem;
             display: flex;
-            flex-direction: row-reverse; 
-
-            .mat-raised-button {
-
-            }
-           
+            align-items: end;
+            gap: 1rem;
+            flex-direction: column;            
         }
         
         .switch-role:hover {

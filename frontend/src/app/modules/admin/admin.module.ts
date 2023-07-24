@@ -25,6 +25,7 @@ import { MatSelectModule } from '@angular/material/select';
 import { AddPlayerComponent } from './components/dialogs/add-player/add-player.component';
 import { ConfirmationDialogComponent } from 'src/app/shared/confirmation-dialog/confirmation-dialog.component';
 import { AddGiftComponent } from './components/dialogs/add-gift/add-gift.component';
+import { NotificationPanelComponent } from 'src/app/shared/notification-panel/notification-panel.component';
 
 const material = [
   MatTableModule,
@@ -62,7 +63,8 @@ const material = [
     ...material,
     DataGridComponent,
     ReactiveFormsModule,
-    ConfirmationDialogComponent
+    ConfirmationDialogComponent,
+    NotificationPanelComponent
   ]
 })
 export class AdminModule { }

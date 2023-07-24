@@ -1,0 +1,37 @@
+.notification-container {
+    display: flex;
+    padding: 1rem;
+    margin-bottom: 1rem;
+    // background: #fff;
+    // margin-top: 1rem;
+
+    .notification {
+       flex-basis: .9;
+       word-spacing: 150%;
+    }
+
+    .action {
+        flex-basis: .1;
+        display: flex;
+        justify-content: space-between;
+    }
+
+    .status {
+        flex-basis: .1;
+    }
+
+    .highlight {
+        font-size: larger;
+        font-weight: 600;
+        line-height: 150%;
+    }
+}
+
+.row {
+    flex-direction: row !important;
+}
+
+.column {
+    flex-direction: column !important;
+    gap: 1rem;
+}
