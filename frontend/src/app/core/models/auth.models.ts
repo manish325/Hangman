@@ -12,7 +12,15 @@ export interface ICreatePlayer {
         contactNumber : string,
         address : string
     },
-    player : number | string | null
+    player ? : {
+        playerId : string,
+        playerName : string,
+        earnedCoins : number,
+        createdTournaments : number,
+        playedTournaments : number,
+        gifts : number
+
+    }
 }
 
 export interface ILoginResponse {
@@ -20,7 +28,11 @@ export interface ILoginResponse {
     userDetails : ICreatePlayer
 }
 
-export interface IResponse<T> {
+
+export interface ICoins {
+    availableCoins? : number
+}
+export interface IResponse<T> extends ICoins {
     totalCount : number,
-    data : T[]
+    data : T[],
 }

@@ -10,6 +10,46 @@
 
         .mat-drawer-content {
             min-width: 80%;
+
+            .player-gifts {
+                .gifts {
+                    .mat-drawer-container {
+                        display: flex !important;
+            
+                        .mat-drawer-content {
+                            flex: 1 !important;
+                            height: 80vh !important;
+                        }
+
+                        .mat-drawer {
+                            .mat-mdc-card-title {
+                                display: flex;
+                                justify-content: space-between;
+                                color: black !important;
+                                gap: 6rem;
+        
+                                .gift-name {
+                                    display: flex;
+                                    gap: 1rem;
+                                    align-items: center;
+        
+                                    .mat-icon {
+                                        margin-bottom: 1rem;
+                                    }
+                                }
+        
+                                .gift-value {
+                                    display: flex;
+        
+                                    .mat-icon {
+                                        margin-top: 0.35rem;
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
         }
     }
 }

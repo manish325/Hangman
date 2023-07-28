@@ -12,7 +12,7 @@ class PlayerCoinService {
 
     async addCoinsToPlayerRecord(req, res, next) {
         const coinsToAdd = req.score / 10;
-        const Player = await player.findOne({_id : new mongoose.Types.ObjectId(req.userDetails.player)});
+        const Player = await player.findOne({_id : new mongoose.Types.ObjectId(req.userDetails.player.playerId)});
         await Player.updateOne({
             earnedCoins  : Player.earnedCoins + coinsToAdd
         })

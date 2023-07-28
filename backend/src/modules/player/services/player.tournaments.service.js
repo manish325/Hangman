@@ -38,7 +38,7 @@ class PlayerTournamentService {
         }
 
         const tournaments = await tournment.find({...query}).populate('category').limit(pageSize).sort({tournamentName : sortManner});
-        const tournamentsPlayedByPlayer = await player.findOne({_id : new mongoose.Types.ObjectId(req.userDetails.player)});
+        const tournamentsPlayedByPlayer = await player.findOne({_id : new mongoose.Types.ObjectId(req.userDetails.player.playerId)});
         const tournamentsArray = tournamentsPlayedByPlayer.playedTournaments.map(T=>T.tournamentId.toString());
         const tournamentsToPlay = tournaments.map(T=>{
             const tournament = {
@@ -109,7 +109,7 @@ class PlayerTournamentService {
                 }
             }
         }
-        const Player = await player.findOne({_id : new mongoose.Types.ObjectId(req.userDetails.player)}).updateOne(query);
+        const Player = await player.findOne({_id : new mongoose.Types.ObjectId(req.userDetails.player.playerId)}).updateOne(query);
         req.customMessage = 'Tournament Created!'
         next();
     }
@@ -171,7 +171,7 @@ class PlayerTournamentService {
         const { searchText , pageSize , pageNumber , sortManner, filter, self} = req.body;
         const paginatedData = (pageNumber+1) * pageSize;
 
-        const playerId = req.userDetails.player;
+        const playerId = req.userDetails.player.playerId;
         const Player = await player.findOne({_id : new mongoose.Types.ObjectId(playerId)}).populate({
             path: 'playedTournaments.tournamentId',
             populate: {

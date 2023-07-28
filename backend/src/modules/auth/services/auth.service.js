@@ -15,18 +15,29 @@ class AuthService {
     }
 
     async login(req, res, next) {
-        const aUser = await user.findOne({...req.body, isActive : true});
+        const aUser = await user.findOne({...req.body, isActive : true}).populate('player');
         if (aUser) {
                 const payload = {
-                    id: aUser._id,
+                    _id: aUser._id,
                     username: aUser.username,
                     roles: aUser.roles,
-                    player : aUser.player
+                    about : (aUser.about.contactNumber || aUser.about.address) ? {
+                        contactNumber : aUser.about?.contactNumber,
+                        address : aUser.about?.address
+                    } : {},
+                    player : aUser.player ? {
+                        playerId : aUser.player?._id,
+                        playerName : aUser.player?.playerName,
+                        earnedCoins : aUser.player?.earnedCoins,
+                        createdTournaments : aUser.player?.createdTournaments?.length,
+                        playedTournaments : aUser.player?.playedTournaments?.length,
+                        gifts : aUser.player?.gifts?.length
+                    } : null
                 }
                 const token = JSON.sign(payload, secretKey);
                 await res.status(200).json({
                     token,
-                    userDetails: aUser
+                    userDetails: payload
                 })
         } else {
             throw new UnauthorizedError(res, "Access Denied");

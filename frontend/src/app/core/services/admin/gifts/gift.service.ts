@@ -27,4 +27,16 @@ export class GiftService {
   addGift(gift : IGifts) {
       return this.http.post('admin/gifts/addGift', gift)
   }
+
+  getAllAvailableGifts() : Observable<IResponse<IGifts>> {
+    return this.http.get('player/gifts/getAllAvailableGifts') as Observable<IResponse<IGifts>>;
+  }
+
+  getGiftsToClaim() : Observable<IResponse<IGifts>> {
+    return this.http.get('player/gifts/getGiftsToClaim') as Observable<IResponse<IGifts>>;
+  }
+
+  claimGifts(payload : {giftId : string, quantity : number}[]) {
+    return this.http.post('player/gifts/claimGifts', payload);
+  }
 }

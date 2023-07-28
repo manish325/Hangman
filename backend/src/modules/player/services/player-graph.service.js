@@ -11,8 +11,15 @@ class PlayerGraphService {
     constructor() {}
 
     async getPlayerGraphData(req, res) {
-        res.send(
-            '<h1>Route Working Fine</h1>')
+        const playerScores = await score.find({playerId : new mongoose.Types.ObjectId(req.userDetails.player.playerId)}).populate('tournamentId');
+        const graphData = playerScores.map(PS=>{
+            return {
+                tournament : PS.tournamentId.tournamentName,
+                score : PS.score
+            }
+        })
+
+        res.status(StatusCodes.OK).json(graphData);
     }
 }
 

@@ -20,6 +20,24 @@
     }
 }
 
+.mat-mdc-form-field {
+    .mat-mdc-form-field-bottom-align {
+        background-color: white !important;
+    }
+}
+
 .mat-mdc-select-panel {
     background-color: transparent !important;
+}
+
+
+.mat-mdc-select-panel {
+	background-color: #fff !important;
+	gap: 1rem !important;
+	display: flex !important;
+	flex-direction: column !important;
+}
+
+.mat-divider {
+	border-top-color: forestgreen !important;
 }

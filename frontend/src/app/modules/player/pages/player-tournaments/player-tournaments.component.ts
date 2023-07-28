@@ -68,7 +68,7 @@ export class PlayerTournamentsComponent implements OnInit {
         sortManner : 1,
         self : this.self
       }
-      this.playerService.getTournamentsToPlay(this.authService.getUserDetails()?.player, payload).subscribe({
+      this.playerService.getTournamentsToPlay(this.authService.getUserDetails()?.player?.playerId, payload).subscribe({
         next : (response : IResponse<ITournaments>)=>{
           this.totalCount = response.totalCount;
           this.dataSource = response.data;
@@ -94,7 +94,7 @@ export class PlayerTournamentsComponent implements OnInit {
         AddTournamentComponent
       ).afterClosed().subscribe({
         next : (response : ITournaments)=>{
-          response.playerId = this.authService.getUserDetails()?.player
+          response.playerId = this.authService.getUserDetails()?.player?.playerId
           this.playerService.createTournament(response as ITournaments).subscribe({
             next : (response : any)=>{
               alert(response.message)

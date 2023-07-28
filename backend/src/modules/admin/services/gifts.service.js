@@ -77,8 +77,32 @@ class GiftsService {
         })
     }
 
-    async updateGiftQuantity(req, res) {
-        
+    async updateGiftQuantity(req, res, next) {
+        const {Gifts} = req.body;
+        const giftsObjectIds = [];
+        const query = [];
+        Gifts.forEach(G=>{
+            const objectId = new mongoose.Types.ObjectId(G.giftId);
+            giftsObjectIds.push(objectId);
+            query.push({
+                updateOne : {
+                    filter : {_id : objectId},
+                    update : {
+                        giftValue : {
+                            $subtract : ['$giftValue', G.quantity]
+                        }
+                    }
+                }
+            })
+        })
+
+        res.locals.Gifts = Gifts;
+        res.locals.giftsObjectIds = giftsObjectIds;
+        res.locals.query = query;
+
+       await gifts.bulkWrite(query);
+       next();
+
     }
 }
 

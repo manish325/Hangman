@@ -1,0 +1,16 @@
+.player-progress {
+    min-height: 100vh;
+    padding: 1rem;
+    display: flex;
+
+    .label {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        gap: .5rem;
+
+        .mat-icon {
+            margin-bottom: .75rem;
+        }
+    }
+}

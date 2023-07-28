@@ -15,7 +15,11 @@ class LeaderBoardService {
     async getLeaderboard(req, res) {
        const { searchText , pageSize , pageNumber, filter} = req.body;
        const paginatedData = (pageNumber) * pageSize;
-       const query = {};
+       const query = {
+        score : {
+            $ne : 0
+        }
+       };
        if(filter.category) {
         query.categoryId = {
             $eq : new mongoose.Types.ObjectId(filter.category)

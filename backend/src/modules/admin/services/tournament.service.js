@@ -70,7 +70,19 @@ class TournamentService {
         }
 
         async updateTournamentStatus(req, res, next) {
-            
+            const {approved, tournamentId} = req.body;
+            const tournamentToUpdate = await tournment.findOne({_id : new mongoose.Types.ObjectId(tournamentId)})
+            if(approved) {
+                await tournamentToUpdate.updateOne({
+                    status : 0
+                })
+            } else {
+                await tournamentToUpdate.updateOne({
+                    status : 1
+                })
+            }
+
+            res.status(StatusCodes.ACCEPTED).send();
         } 
 }
 

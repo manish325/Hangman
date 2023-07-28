@@ -1,0 +1,161 @@
+.player-gifts {
+    display: flex;
+    flex-direction: column;
+
+    .coins {
+        flex: 0.1;
+        display: flex;
+        gap: 2rem;
+
+        .value {
+            display: flex;
+            color: black;
+            font-weight: 1900;
+
+            .mat-icon {
+                margin-top: 0.3rem;
+            }
+        }
+    }
+
+    .gifts {
+        flex: 0.9;
+        display: flex;
+
+        .label {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 0.5rem;
+
+            .mat-icon {
+                margin-bottom: 0.75rem;
+            }
+        }
+
+        .claimed-gifts-container {
+            .claim-option {
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                padding: 1rem;
+            }
+        }
+
+        
+
+        .claim-gifts-container {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+
+            .gift {
+                display: flex;
+                justify-content: space-between;
+                gap: 20%;
+                width: max-content;
+
+                .gift-1 {
+                    display: flex;
+                    flex-direction: column;
+                    min-width: max-content;
+                    gap: 4rem;
+                    padding: 1rem;
+                    max-height: 40vh;
+                    overflow-y: scroll; /* Enable vertical scrolling */
+                    overflow-x: hidden;
+                    border-bottom: .25rem solid black;
+                }
+
+                .gift-1::-webkit-scrollbar {
+                    display: none;
+                }
+
+                .amount-claimed-container {
+                    display: flex;
+                    flex-direction: column;
+                    justify-content: space-between;
+
+                    span {
+                        display: flex;
+                        align-items: center;
+                        color: white !important;
+                    }
+                    // gap: 5rem;
+                }
+
+                .mat-mdc-card {
+                    border-radius: 0.75rem;
+                    min-width: max-content;
+
+                    .mat-mdc-card-title {
+                        display: flex;
+                        justify-content: space-between;
+                        color: black !important;
+                        gap: 6rem;
+
+                        .gift-name {
+                            display: flex;
+                            gap: 1rem;
+                            align-items: center;
+
+                            .mat-icon {
+                                margin-bottom: 1rem;
+                            }
+                        }
+
+                        .gift-value {
+                            display: flex;
+
+                            .mat-icon {
+                                margin-top: 0.35rem;
+                            }
+                        }
+                    }
+
+                    .mat-mdc-card-content {
+                        padding-left: 0;
+                        padding-right: 0;
+
+                        .content {
+                            display: flex;
+                            justify-content: space-between;
+                            align-items: center;
+
+                            .calculation {
+                                display: flex;
+                                justify-content: space-between;
+                                align-items: center;
+                                gap: .5rem;
+
+                                input {
+                                    width: 2rem;
+                                    text-align: center;
+                                }
+
+                                .mdc-icon-button {
+                                    padding-left: 0;
+                                    padding-right: 0;
+                                    width: min-content;
+
+                                    .mat-icon {
+                                        color: black;
+                                        margin-bottom: 0.5rem;
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+
+        .empty-gifts {
+            display: flex !important;
+            justify-content: center;
+            align-items: center;
+            height: 90%;
+        }
+    }
+}

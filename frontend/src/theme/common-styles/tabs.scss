@@ -22,3 +22,36 @@
         overflow: hidden !important;
     }
 }
+
+th {
+	font-weight: bolder !important;
+}
+
+.player-progress {
+    .mat-mdc-tab-group {
+        .mat-mdc-tab-body-wrapper {
+            flex: 1 !important;
+
+            .mat-mdc-tab-body-content {
+                display: flex !important;
+            }
+
+            .app-graph {
+                flex: 1;
+                display: flex;
+
+                .graph {
+                    display: flex;
+                    flex: 1;
+                    justify-content: center;
+                    align-items: center;
+
+                    .chart-container {
+                        flex: .8 !important;
+                        height: 80%;
+                    }
+                }
+            }
+        }
+    }
+}

@@ -1,1 +1,22 @@
-<p>player-progress works!</p>
+<main class="player-progress">
+    <mat-tab-group>
+        <mat-tab>
+            <ng-template mat-tab-label>
+                <div class="label">
+                    <p>Graph</p>
+                    <mat-icon> bar_chart</mat-icon>
+                </div>
+            </ng-template>
+            <app-graph class="app-graph"></app-graph>
+        </mat-tab>
+        <mat-tab>
+            <ng-template mat-tab-label>
+                <div class="label">
+                    <p>Gifts</p>
+                    <mat-icon>card_giftcard</mat-icon>
+                </div>
+            </ng-template>
+            <app-player-gifts></app-player-gifts>
+        </mat-tab>
+    </mat-tab-group>
+</main>

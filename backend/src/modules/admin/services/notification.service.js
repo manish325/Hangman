@@ -6,7 +6,7 @@ const notifications = require('../../../models/notifications');
 class NotificationService {
         async pushNotification(req , res) {
             const {tournamentId, gifts, customMessage} = req;
-            const player = req.userDetails.player;
+            const player = req.userDetails.player.playerId;
             const notificationToCreate = {
                 player : new mongoose.Types.ObjectId(player),
             }
@@ -17,10 +17,11 @@ class NotificationService {
                 notificationToCreate.gift = gifts.map(G=>{
                     return {
                         giftId : new mongoose.Types.ObjectId(G.giftId),
-                        quantity : G.quantity
+                        giftQuantity : G.quantity
                     }
                 })
             }
+            console.log('Notification To Create : ', notificationToCreate);
             await notifications.create(notificationToCreate);
             res.status(StatusCodes.ACCEPTED).json({
                 message : customMessage
@@ -28,7 +29,7 @@ class NotificationService {
         }
 
         async getAllNotifications(req, res) {
-            const Notifications = await notifications.find().populate(['player', 'tournament', 'gift', 'tournament.category']);
+            const Notifications = await notifications.find().populate(['player', 'tournament', 'gift.giftId', 'tournament.category']);
             const notificationsToSend = Notifications.map(N=>{
                 return {
                     notificationId : N._id,
@@ -65,7 +66,15 @@ class NotificationService {
         }
 
         async changeNotificationStatus (req, res) {
-
+            const {approved, notificationId} = req.body;
+            const updatedNotification = await notifications.findOneAndUpdate({_id : new mongoose.Types.ObjectId(notificationId)}, {
+                approved : approved
+            });
+            if(updatedNotification.tournament || (!updatedNotification.tournament && approved)) {
+                next();
+            } else if(!approved){
+                res.status(StatusCodes.ACCEPTED).send();
+            } 
         }
 }
 

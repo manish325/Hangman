@@ -1,7 +1,7 @@
 const {StatusCodes} = require('http-status-codes');
 const category = require('../../../models/category');
 const { mongoose } = require('../../../configs/db.config');
-const { BadRequest } = require('../../../configs/errors');
+const { BadRequest, CustomApiError } = require('../../../configs/errors');
 const tournment = require('../../../models/tournament');
 const player = require('../../../models/player');
 const score = require('../../../models/score');
@@ -12,24 +12,44 @@ class PlayerGiftService {
     async addGiftToPlayerRecords(req, res) {
         //add in format { giftId : string , giftQuantity : number }
         //If gift Id exist, increase gift quantity else add another one
+        const {Gifts, giftObjectIds, query} = res.locals;
+        const Player = await player.findOne({_id : new mongoose.Types.ObjectId(req.userDetails?.player?.playerId)});
+        giftObjectIds.map(async (G, index)=>{
+          const updatedPlayer = await player.updateOne(
+                {
+                    'gifts.giftId' : G 
+                },
+                {
+                    $set : {
+                        'gifts.$.giftQuantity' : Gifts[index].quantity
+                    }
+                }
+            );
+            if(!updatedPlayer){
+                Player.updateOne({
+                   $push : {
+                    gifts : {
+                        giftId : Gifts[index].giftId,
+                        giftQuantity : Gifts[index].quantity
+                    }
+                   }
+                })
+            }
+        });
+
+        res.status(StatusCodes.ACCEPTED).send();
     }
 
     async getGiftsToClaim(req, res) {
         //get the player,  //get his/her current coins, //get gifts based on this
-        const playerId = req.userDetails.player;
+       try { const playerId = req.userDetails.player.playerId;
         const Player = await player.findOne({_id : new mongoose.Types.ObjectId(playerId)});
         let playerAvailableCoins = Player.earnedCoins;
         const pendingNotifications = await notifications.find({
-            player : {
-                $eq : new mongoose.Types.ObjectId(playerId)
-            },
-            gift : {
-                $size : {
-                    $ne : 0
-                }
-            },
-            approved : -1
-        }).populate('gift.giftId')
+            player: new mongoose.Types.ObjectId(playerId),
+            gift: { $not: { $size: 0 } }, // Check if the 'gift' field is not an empty array
+            approved: -1,
+          }).populate('gift.giftId');
 
         if(pendingNotifications.length) {
             pendingNotifications.forEach(N=>{
@@ -51,9 +71,12 @@ class PlayerGiftService {
         });
 
         res.status(StatusCodes.OK).json({
-            totalCount : giftsAvailable.length,
+            availableCoins : playerAvailableCoins,
             data : giftsAvailable
-        });
+        });} catch(e) {
+            console.log(e);
+            throw new CustomApiError(e);
+        }
 
     }
 
@@ -64,6 +87,25 @@ class PlayerGiftService {
                 giftId : G.giftId,
                 quantity : G.quantity
             }
+        });
+        next();
+    }
+
+    async getAllAvailableGifts(req, res) {
+        const playerId = req.userDetails.player.playerId;
+        const Player = await player.findOne({_id : new mongoose.Types.ObjectId(playerId)});
+        const availableGifts = Player.gifts.map(G=>{
+            return {
+                giftId : G._id,
+                giftName : G.giftName,
+                giftValue : G.giftValue,
+                quantity : G.quantity
+            }
+        });
+
+        res.status(StatusCodes.OK).json({
+            totalCount : availableGifts.length,
+            data : availableGifts
         })
     }
 }

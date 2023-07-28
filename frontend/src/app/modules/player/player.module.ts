@@ -21,6 +21,8 @@ import { AddTournamentComponent } from './components/add-tournament/add-tourname
 import { ReactiveFormsModule } from '@angular/forms';
 import { GameBoardComponent } from './pages/game-board/game-board.component';
 import { ScoreComponent } from './pages/game-board/dialogs/score/score.component';
+import { PlayerGiftsComponent } from './pages/player-gifts/player-gifts.component';
+import { GraphComponent } from 'src/app/shared/graph/graph.component';
 
 const material = [
   MatTableModule,
@@ -47,14 +49,16 @@ const material = [
     PlayerProgressComponent,
     AddTournamentComponent,
     GameBoardComponent,
-    ScoreComponent
+    ScoreComponent,
+    PlayerGiftsComponent
   ],
   imports: [
     CommonModule,
     ...material,
     PlayerRoutingModule,
     DataGridComponent,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    GraphComponent
   ]
 })
 export class PlayerModule { }

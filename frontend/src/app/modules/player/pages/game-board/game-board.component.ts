@@ -138,7 +138,7 @@ export class GameBoardComponent implements OnInit {
     }).afterClosed().subscribe({
       next: () => {
         const payload: IScore = {
-          playerId: this.authService.getUserDetails()?.player as string || '',
+          playerId: this.authService.getUserDetails()?.player?.playerId as string || '',
           tournamentId: this.tournamentId,
           categoryId: this.tournament.tournamentCategory.categoryId,
           score: this.totalScore

@@ -1,9 +1,10 @@
 require('dotenv').config();
-const {mongoose, connectDB}  = require('./src/configs/db.config');
+// move to import syntax -> es6 modules
+const { mongoose, connectDB } = require('./src/configs/db.config');
 const applyMiddleWares = require('./src/middlewares');
 const exceptionHandler = require('./src/middlewares/error-handler/exception');
 const mainRouter = require('./src/routes/router');
-const portNumber =  process.env.PORT || 3000;
+const portNumber = process.env.PORT || 3000;
 const DB_URI = process.env.DB_URI;
 const express = require('express');
 const app = express();
@@ -16,9 +17,9 @@ require('express-async-errors');
 applyMiddleWares(app);
 app.use('/', mainRouter);
 app.use(exceptionHandler);
-const start = async ()=> {
+const start = async () => {
         await connectDB(DB_URI);
-        app.listen(portNumber, console.log('Server Started')) ;    
+        app.listen(portNumber, console.log('Server Started'));
 }
 
 start();

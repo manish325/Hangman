@@ -40,7 +40,7 @@ export class PlayerDashboardComponent {
       }
     ];
     this.playerName = authService.getUserDetails()?.username || '';
-    router.navigate(['player', 'tournaments'])
+    router.navigate(['player', 'progress'])
   }
 
   logout() {

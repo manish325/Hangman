@@ -3,6 +3,7 @@
 @import "./theme/common-styles/forms.scss";
 @import "./theme/common-styles/button.scss";
 @import "./theme/common-styles/tabs.scss";
+@import "./theme/common-styles/card.scss";
 
 html, body { height: 100%; }
 body { 
@@ -38,27 +39,7 @@ body {
 }
 
 * :not(.mat-icon){
-	
-	// font-family: 'Luckiest Guy', cursive !important;
-	// font-family: 'Anton', sans-serif !important;
-	// font-family: 'Press Start 2P', cursive !important;
 	font-family: 'Changa One', cursive !important;
 	font-size: large;
-	
-
 }
 
-th {
-	font-weight: bolder !important;
-}
-
-.mat-mdc-select-panel {
-	background-color: #fff !important;
-	gap: 1rem !important;
-	display: flex !important;
-	flex-direction: column !important;
-}
-
-.mat-divider {
-	border-top-color: forestgreen !important;
-}

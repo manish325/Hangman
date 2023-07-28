@@ -1,0 +1,136 @@
+<main class="player-gifts">
+    <section class="coins">
+        <h1>Coins You have : </h1>
+        <div class="value">
+            <h2>{{playerAvailableCoins}}</h2>
+            <mat-icon> attach_money</mat-icon>
+        </div>
+
+    </section>
+    <section class="gifts">
+        <mat-tab-group (selectedTabChange)="handleTabChange()">
+            <mat-tab>
+                <ng-template mat-tab-label>
+                    <div class="label">
+                        <p>Claim</p>
+                        <mat-icon>how_to_vote</mat-icon>
+                    </div>
+                </ng-template>
+                <mat-drawer-container>
+                    <mat-drawer [opened]="amountClaimed!==0" mode="side">
+                        <div class="claimed-gifts-container">
+                            <mat-card *ngFor="let gift of claimedGiftsList">
+                                <mat-card-title>
+                                    <div class="gift-name">
+                                        <mat-icon>card_giftcard</mat-icon>
+                                        <h1>{{gift.giftName}}</h1>
+                                    </div>
+                                    <div class="gift-value">
+                                        <h2>
+                                            {{gift.quantity}}
+                                        </h2>
+                                    </div>
+                                </mat-card-title>
+                            </mat-card>
+                            <div class="claim-option">
+                                <button mat-raised-button color="primary" (click)="claimGifts()">
+                                    Claim
+                                </button>
+                            </div>
+                        </div>
+                    </mat-drawer>
+                    <!-- <mat-sidenav-content> -->
+                    <div class="claim-gifts-container" [ngClass]="{'empty-gifts' : giftsToClaim.length===0}">
+                        <ng-container *ngIf="giftsToClaim.length; else empty">
+
+                            <h2>Gifts You can claim!</h2>
+                            <div class="gift">
+                                <div class="gift-1">
+                                    <mat-card *ngFor="let gift of giftsToClaim; let i=index">
+                                        <mat-card-title>
+                                            <div class="gift-name">
+                                                <mat-icon>card_giftcard</mat-icon>
+                                                <h1>{{gift.giftName}}</h1>
+                                            </div>
+                                            <div class="gift-value">
+                                                <h2>
+                                                    {{gift.giftValue}}
+                                                </h2>
+                                                <mat-icon>attach_money</mat-icon>
+                                            </div>
+                                        </mat-card-title>
+                                        <mat-card-content>
+                                            <div class="content">
+                                                <button mat-raised-button color="primary"
+                                                    [ngStyle]="{'visibility': 'hidden'}">
+                                                    Claim
+                                                </button>
+                                                <div class="calculation">
+                                                    <button mat-icon-button
+                                                        *ngIf="$any(giftQuantityArray.controls[i]).value"
+                                                        (click)="decreaseGiftQuantity(gift, $any(giftQuantityArray.controls[i]))">
+                                                        <mat-icon>remove_circle</mat-icon>
+                                                    </button>
+                                                    <input readonly matInput
+                                                        [formControl]="$any(giftQuantityArray.controls[i])">
+                                                    <button mat-icon-button
+                                                        (click)="increaseGiftQuantity(gift, $any(giftQuantityArray.controls[i]))">
+                                                        <mat-icon>add_box</mat-icon>
+                                                    </button>
+                                                </div>
+                                            </div>
+                                        </mat-card-content>
+                                    </mat-card>
+                                </div>
+
+                                <div class="amount-claimed-container">
+                                    <div>
+                                        <h2>Amount Claimed</h2>
+                                        <span>{{amountClaimed}} <mat-icon> attach_money</mat-icon></span>
+                                    </div>
+                                    <div>
+                                        <h2>Amount Balance</h2>
+                                        <span>{{playerAvailableCoins - amountClaimed}} <mat-icon>
+                                                attach_money</mat-icon></span>
+                                    </div>
+                                </div>
+                            </div>
+                        </ng-container>
+                        <ng-template #empty>
+                            <div class="empty">
+                                <div class="icon">
+                                    <mat-icon>card_giftcard</mat-icon>
+                                </div>
+                                <div class="message">
+                                    <h2>No Gifts to Claim!</h2>
+                                </div>
+                            </div>
+                        </ng-template>
+                    </div>
+                    <!-- </mat-sidenav-content> -->
+                </mat-drawer-container>
+            </mat-tab>
+            <mat-tab>
+                <ng-template mat-tab-label>
+                    <div class="label">
+                        <p>View</p>
+                        <mat-icon>redeem</mat-icon>
+                    </div>
+                </ng-template>
+
+                <div class="gifts-card-container">
+                    <mat-card *ngFor="let gift of gifts">
+                        <mat-card-title>
+                            <mat-icon>card_giftcard</mat-icon>
+                            <h2>{{gift.giftName}}</h2>
+                        </mat-card-title>
+                        <mat-card-content>
+                            <h3>{{gift.giftValue}}</h3>
+                            <h3>{{gift.quantity}}</h3>
+                        </mat-card-content>
+                    </mat-card>
+                </div>
+            </mat-tab>
+        </mat-tab-group>
+    </section>
+</main>
